@@ -19,7 +19,7 @@ body {
 .space-header {
   display: flex;
   align-items: center;
-  justify-content: center;
+  /* justify-content: center; */
   width: 35%;
   height: 88px;
   background: #fff;
