@@ -1,38 +1,66 @@
+html,
+body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+}
+
 .App {
-  text-align: center;
+  width: 70%;
+  margin: 0 auto;
+  border: 1px solid #e3e3e3;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.container {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+}
+
+.space-header {
+  display: flex;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  width: 35%;
+  height: 88px;
+  background: #fff;
+  font-size: 24px;
+  font-family: monospace;
+}
+
+.space-body {
+  width: 35%;
+  height: 100vh;
+  background: #fafafb;
+  max-height: 100vh;
+  overflow: auto;
+}
+.map-header {
+  display: flex;
+  align-items: center;
+  width: 65%;
+  height: 88px;
+  background: #333333;
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.map-body {
+  width: 65%;
+  height: 100vh;
+  background: #000;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
+.trip-title {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.trip-planet {
+  font-size: 12px;
+}
+
+@media screen and (max-width: 1600px) {
+  .App {
+    width: 100%;
+    margin: 0 auto;
   }
 }
