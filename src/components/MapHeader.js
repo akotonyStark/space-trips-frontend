@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import arrow from '../assets/icons/Arrow.svg'
+import SearchBar from './SearchBar'
 
 const StyledMenu = styled.div`
   padding-left: 5%;
@@ -13,7 +14,9 @@ const StyledMenu = styled.div`
 
 const StyledMenuItem = styled.div`
   width: 50%;
+  height: 50px;
   display: flex;
+  align-items: center;
   gap: 10%;
 `
 
@@ -31,8 +34,8 @@ const MapHeader = () => {
     <div className='map-header'>
       <StyledMenu>
         <StyledMenuItem>
-          <div>Departure</div>
-          <div>Search Component</div>
+          <span>Departure</span>
+          <SearchBar />
         </StyledMenuItem>
 
         <StyledMenuItem>
