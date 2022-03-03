@@ -58,6 +58,14 @@ body {
   font-size: 12px;
 }
 
+.mapboxgl-popup-close-button {
+  display: none !important;
+}
+
+.mapboxgl-popup-content {
+  padding: 0px !important;
+}
+
 @media screen and (max-width: 1600px) {
   .App {
     width: 100%;

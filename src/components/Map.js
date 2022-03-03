@@ -167,6 +167,32 @@ const MapBody = () => {
         <FullscreenControl position='top-right' />
         <ScaleControl />
 
+        {popupInfo && (
+          <Popup
+            anchor='bottom'
+            longitude={Number(popupInfo.longitude)}
+            latitude={Number(popupInfo.latitude)}
+            closeOnClick={false}
+            onClose={() => setPopupInfo(null)}
+          >
+            <img
+              width='100%'
+              src={popupInfo.image}
+              style={{ height: 150 }}
+              onClick={() => setPopupInfo(null)}
+            />
+            <div
+              style={{
+                height: 30,
+                fontFamily: 'Lato',
+                textAlign: 'center',
+                fontWeight: 'bold',
+              }}
+            >
+              {popupInfo.city}
+            </div>
+          </Popup>
+        )}
         {pins}
       </Map>
     </div>
