@@ -1,19 +1,51 @@
 import React from 'react'
 import styled from 'styled-components'
+import arrow from '../assets/icons/Arrow.svg'
+import SearchInput from './SearchInput'
 
-const StyledInput = styled.input`
-  color: #f1f1f1;
-  background-color: inherit;
-  height: 30px;
-  width: 100%;
-  padding-left: 10px;
-  border: 0px;
+const StyledMenu = styled.div`
+  padding-left: 5%;
+  display: flex;
+  justify-content: space-between;
+  font-family: 'Lato';
+  font-size: 16;
+  width: 90%;
+`
+
+const StyledMenuItem = styled.div`
+  width: 50%;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  gap: 10%;
+`
+
+const StyledButton = styled.div`
+  height: 100%;
+  width: 10%;
+  background-color: #ffd34d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `
 
 const SearchBar = () => {
   return (
-    <div>
-      <StyledInput placeholder='Search for Space Trips' />
+    <div className='map-header'>
+      <StyledMenu>
+        <StyledMenuItem>
+          <span>Departure</span>
+          <SearchInput />
+        </StyledMenuItem>
+
+        <StyledMenuItem>
+          <div>Departure time</div>
+          <div>9/20/2019 - 12.45am</div>
+        </StyledMenuItem>
+      </StyledMenu>
+      <StyledButton>
+        <img src={arrow} alt='arrow' />
+      </StyledButton>
     </div>
   )
 }

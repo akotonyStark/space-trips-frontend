@@ -1,6 +1,6 @@
 import './App.css'
 import Map from './components/Map'
-import MapHeader from './components/MapHeader'
+import SearchBar from './components/SearchBar'
 import TripsList from './components/List'
 import TripsHeader from './components/TripsHeader'
 
@@ -9,7 +9,7 @@ function App() {
     <div className='App'>
       <div className='container'>
         <TripsHeader />
-        <MapHeader />
+        <SearchBar />
       </div>
       <div className='container'>
         <TripsList />
