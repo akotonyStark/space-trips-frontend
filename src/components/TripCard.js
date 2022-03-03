@@ -27,10 +27,10 @@ const StyledButton = styled.div`
   font-size: 12px;
 `
 
-const TripCard = ({ center }) => {
+const TripCard = ({ spaceCenter, handleHover }) => {
   return (
     <div>
-      <StyledCard className='trip-card'>
+      <StyledCard className='trip-card' onMouseOver={handleHover}>
         <div style={{ padding: 10 }}>
           <div
             style={{
@@ -39,12 +39,12 @@ const TripCard = ({ center }) => {
               alignItems: 'center',
             }}
           >
-            <span className='trip-title'>{center.name}</span>
+            <span className='trip-title'>{spaceCenter.name}</span>
             <img src={rocket} alt={rocket} />
           </div>
-          <span className='trip-planet'>{center.planet}</span>
+          <span className='trip-planet'>{spaceCenter.planet}</span>
           <p style={{ marginTop: 30 }}>
-            {center.flights.length} departures planned today
+            {spaceCenter.flights.length} departures planned today
           </p>
         </div>
 

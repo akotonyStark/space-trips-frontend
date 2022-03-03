@@ -51,14 +51,7 @@ export const SPACE_CENTERS = [
         image:
           'http://upload.wikimedia.org/wikipedia/commons/thumb/3/36/SeattleI5Skyline.jpg/240px-SeattleI5Skyline.jpg',
       },
-      {
-        name: 'Kennedy Flight Three',
-        departureTime: '9/20/2019',
-        latitude: 61.579606918652054,
-        longitude: 10.244298260567439,
-        image:
-          'http://upload.wikimedia.org/wikipedia/commons/thumb/9/97/Austin2012-12-01.JPG/240px-Austin2012-12-01.JPG',
-      },
+
       {
         name: 'Kennedy Flight Four',
         departureTime: '9/20/2019',

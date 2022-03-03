@@ -1,11 +1,19 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import TripCard from './TripCard'
+import { AppContext } from '../App'
 
-const List = ({ trips }) => {
+const List = () => {
+  const [, trips, , , , , handleHover] = React.useContext(AppContext)
   return (
     <div className='space-body'>
       {trips.length > 0 &&
-        trips.map((center, index) => <TripCard key={index} center={center} />)}
+        trips.map((spaceCenter, index) => (
+          <TripCard
+            key={index}
+            spaceCenter={spaceCenter}
+            handleHover={handleHover}
+          />
+        ))}
     </div>
   )
 }

@@ -8,16 +8,12 @@ import Map, {
   GeolocateControl,
 } from 'react-map-gl'
 
-import Pin from '../assets/marker.png'
-import styled from 'styled-components'
+import YellowPin from '../assets/marker.png'
+import RedPin from '../assets/red.png'
+
 import { AppContext } from '../App'
 
-const StylePin = styled.img`
-  width: 24px;
-  height: 30px;
-`
-
-const MapBody = () => {
+const MapBody = ({ hovered }) => {
   const [popupInfo, setPopupInfo] = useState(null)
   const [, trips, , viewState, ,] = useContext(AppContext)
 
@@ -30,7 +26,11 @@ const MapBody = () => {
           latitude={trip.latitude}
           anchor='bottom'
         >
-          <StylePin src={Pin} onClick={() => setPopupInfo(trip)} />
+          {!hovered ? (
+            <img src={YellowPin} onClick={() => setPopupInfo(trip)} />
+          ) : (
+            <img src={RedPin} onClick={() => setPopupInfo(trip)} />
+          )}
         </Marker>
       )),
     [trips]
@@ -59,6 +59,7 @@ const MapBody = () => {
             <img
               width='100%'
               src={popupInfo.image}
+              alt='marker'
               style={{ height: 150 }}
               onClick={() => setPopupInfo(null)}
             />

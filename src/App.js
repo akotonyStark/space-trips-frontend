@@ -3,7 +3,7 @@ import Map from './components/Map'
 import SearchBar from './components/SearchBar'
 import TripsList from './components/List'
 import TripsHeader from './components/TripsHeader'
-import React, { createContext, useEffect } from 'react'
+import React, { createContext, useState } from 'react'
 import { SPACE_CENTERS } from './data/store'
 
 export const AppContext = createContext()
@@ -21,14 +21,27 @@ function App() {
     pitch: 0,
     transitionDuration: 1000,
   })
+  const [hovered, setHovered] = useState(false)
 
-  useEffect(() => {
-    // console.log('Curent ViewState', viewState)
-  }, [viewState])
+  const handleHover = () => {
+    setHovered(true)
+  }
+
+  React.useEffect(() => {
+    console.log(hovered)
+  }, [hovered])
 
   return (
     <AppContext.Provider
-      value={[spaceCenters, trips, setTrips, viewState, setViewState]}
+      value={[
+        spaceCenters,
+        trips,
+        setTrips,
+        viewState,
+        setViewState,
+        hovered,
+        handleHover,
+      ]}
     >
       <div className='App'>
         <div className='container'>
@@ -36,7 +49,7 @@ function App() {
           <SearchBar />
         </div>
         <div className='container'>
-          <TripsList trips={trips} />
+          <TripsList />
           <Map />
         </div>
       </div>

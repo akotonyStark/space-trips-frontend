@@ -1,7 +1,8 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import styled from 'styled-components'
 import arrow from '../assets/icons/Arrow.svg'
 import { AppContext } from '../App'
+import DateTimePicker from 'react-datetime-picker'
 
 const StyledMenu = styled.div`
   padding-left: 5%;
@@ -45,6 +46,8 @@ const SearchBar = () => {
   const [spaceCenters, , setTrips, viewState, setViewState] =
     useContext(AppContext)
 
+  const [depatureDate, setdepatureDate] = useState(new Date('2019/9/20'))
+
   const handleSelectChage = (name) => {
     let res = spaceCenters.filter((center) => center.name === name)
 
@@ -70,7 +73,14 @@ const SearchBar = () => {
 
         <StyledMenuItem>
           <div>Departure time</div>
-          <div>9/20/2019 - 12.45am</div>
+          <div className='datetime-picker'>
+            <div>9/20/2019 - 12.45am</div>
+            {/* <DateTimePicker
+              // calendarIcon={null}
+              onChange={(value) => console.log(value)}
+              value={depatureDate}
+            /> */}
+          </div>
         </StyledMenuItem>
       </StyledMenu>
       <StyledButton>

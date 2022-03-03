@@ -71,6 +71,16 @@ body {
   padding: 0px !important;
 }
 
+.react-datetime-picker__inputGroup__input {
+  color: white;
+  border: none;
+}
+
+.datetime-picker {
+  border: 0px;
+  background-color: inherit;
+}
+
 @media screen and (max-width: 1600px) {
   .App {
     width: 100%;
