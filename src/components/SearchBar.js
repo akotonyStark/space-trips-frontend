@@ -42,12 +42,18 @@ const SpaceCenterName = styled.option`
 `
 
 const SearchBar = () => {
-  const [spaceCenters, , setTrips] = useContext(AppContext)
+  const [spaceCenters, , setTrips, viewState, setViewState] =
+    useContext(AppContext)
 
   const handleSelectChage = (name) => {
     let res = spaceCenters.filter((center) => center.name === name)
-    setTrips((trips) => res)
-    console.log(res)
+
+    setTrips((prev) => res)
+    setViewState({
+      ...viewState,
+      longitude: res[0].longitude,
+      latitude: res[0].latitude,
+    })
   }
 
   return (

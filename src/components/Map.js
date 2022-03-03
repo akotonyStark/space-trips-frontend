@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo, useContext } from 'react'
+import React, { useState, useMemo, useContext } from 'react'
 import Map, {
   Marker,
   Popup,
@@ -10,51 +10,31 @@ import Map, {
 
 import Pin from '../assets/marker.png'
 import styled from 'styled-components'
+import { AppContext } from '../App'
 
 const StylePin = styled.img`
   width: 24px;
   height: 30px;
 `
 
-const MapBody = ({ viewState }) => {
+const MapBody = () => {
   const [popupInfo, setPopupInfo] = useState(null)
-  // const [flights, setFlights] = useState([
-  //   {
-  //     name: 'Nyasia Flight One',
-  //     departureTime: '9/20/2019',
-  //     latitude: 41.579606918652054,
-  //     longitude: 4.244298260567439,
-  //     image:
-  //       'http://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Above_Gotham.jpg/240px-Above_Gotham.jpg',
-  //   },
-  //   {
-  //     name: 'Nyasia Flight Two',
-  //     departureTime: '9/20/2019',
-  //     latitude: 45.579606918652054,
-  //     longitude: 4.244298260567439,
-  //     image:
-  //       'http://upload.wikimedia.org/wikipedia/commons/thumb/5/57/LA_Skyline_Mountains2.jpg/240px-LA_Skyline_Mountains2.jpg',
-  //   },
-  // ])
+  const [, trips, , viewState, ,] = useContext(AppContext)
 
-  useEffect(() => {
-    // console.log(flights)
-  })
-
-  // const pins = useMemo(
-  //   () =>
-  //     flights.map((trip, index) => (
-  //       <Marker
-  //         key={`marker-${index}`}
-  //         longitude={trip.longitude}
-  //         latitude={trip.latitude}
-  //         anchor='bottom'
-  //       >
-  //         <StylePin src={Pin} onClick={() => setPopupInfo(trip)} />
-  //       </Marker>
-  //     )),
-  //   []
-  // )
+  const pins = useMemo(
+    () =>
+      trips.map((trip, index) => (
+        <Marker
+          key={`marker-${index}`}
+          longitude={trip.longitude}
+          latitude={trip.latitude}
+          anchor='bottom'
+        >
+          <StylePin src={Pin} onClick={() => setPopupInfo(trip)} />
+        </Marker>
+      )),
+    [trips]
+  )
 
   return (
     <div className='map-body'>
@@ -94,7 +74,7 @@ const MapBody = ({ viewState }) => {
             </div>
           </Popup>
         )}
-        {/* {pins} */}
+        {pins}
       </Map>
     </div>
   )

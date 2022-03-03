@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react'
 import TripCard from './TripCard'
-import { AppContext } from '../App'
 
 const List = ({ trips }) => {
   return (

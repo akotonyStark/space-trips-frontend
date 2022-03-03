@@ -10,12 +10,7 @@ export const AppContext = createContext()
 
 function App() {
   const [spaceCenters, setSpaceCenters] = React.useState(SPACE_CENTERS)
-  const [trips, setTrips] = React.useState([])
-
-  useEffect(() => {
-    console.log('Trips changed')
-  }, [trips])
-
+  const [trips, setTrips] = React.useState(SPACE_CENTERS)
   const [viewState, setViewState] = React.useState({
     width: '100%',
     height: 900,
@@ -27,8 +22,14 @@ function App() {
     transitionDuration: 1000,
   })
 
+  useEffect(() => {
+    // console.log('Curent ViewState', viewState)
+  }, [viewState])
+
   return (
-    <AppContext.Provider value={[spaceCenters, trips, setTrips]}>
+    <AppContext.Provider
+      value={[spaceCenters, trips, setTrips, viewState, setViewState]}
+    >
       <div className='App'>
         <div className='container'>
           <TripsHeader />
@@ -36,7 +37,7 @@ function App() {
         </div>
         <div className='container'>
           <TripsList trips={trips} />
-          <Map viewState={viewState} />
+          <Map />
         </div>
       </div>
     </AppContext.Provider>

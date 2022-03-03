@@ -8,13 +8,11 @@ const StyledCard = styled.div`
   margin-top: 35px;
   height: 200px;
   background-color: #fff;
-
   border: '1px solid black';
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   font-family: 'Lato';
-  font-size: 16;
 `
 
 const StyledButton = styled.div`
@@ -26,6 +24,7 @@ const StyledButton = styled.div`
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  font-size: 12px;
 `
 
 const TripCard = ({ center }) => {
