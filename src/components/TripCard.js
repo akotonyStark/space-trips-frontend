@@ -8,7 +8,7 @@ const StyledCard = styled.div`
   margin-top: 35px;
   height: 200px;
   background-color: #fff;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+
   border: '1px solid black';
   display: flex;
   flex-direction: column;
@@ -28,10 +28,10 @@ const StyledButton = styled.div`
   cursor: pointer;
 `
 
-const TripCard = () => {
+const TripCard = ({ center }) => {
   return (
     <div>
-      <StyledCard>
+      <StyledCard className='trip-card'>
         <div style={{ padding: 10 }}>
           <div
             style={{
@@ -40,11 +40,13 @@ const TripCard = () => {
               alignItems: 'center',
             }}
           >
-            <span className='trip-title'>Nyasia Isla Space Center</span>
+            <span className='trip-title'>{center.name}</span>
             <img src={rocket} alt={rocket} />
           </div>
-          <span className='trip-planet'>Earth</span>
-          <p style={{ marginTop: 30 }}>12 departures planned today</p>
+          <span className='trip-planet'>{center.planet}</span>
+          <p style={{ marginTop: 30 }}>
+            {center.flights.length} departures planned today
+          </p>
         </div>
 
         <StyledButton>SEE ALL FLIGHTS</StyledButton>

@@ -1,7 +1,6 @@
 import React, { useContext } from 'react'
 import styled from 'styled-components'
 import arrow from '../assets/icons/Arrow.svg'
-import SearchInput from './SearchInput'
 import { AppContext } from '../App'
 
 const StyledMenu = styled.div`
@@ -43,13 +42,20 @@ const SpaceCenterName = styled.option`
 `
 
 const SearchBar = () => {
-  const [spaceCenters, setSpaceCenters] = useContext(AppContext)
+  const [spaceCenters, , setTrips] = useContext(AppContext)
+
+  const handleSelectChage = (name) => {
+    let res = spaceCenters.filter((center) => center.name === name)
+    setTrips((trips) => res)
+    console.log(res)
+  }
+
   return (
     <div className='map-header'>
       <StyledMenu>
         <StyledMenuItem>
           <span>Departure</span>
-          <SpaceCenters onChange={(e) => console.log(e.target.value)}>
+          <SpaceCenters onChange={(e) => handleSelectChage(e.target.value)}>
             {spaceCenters.map((center) => (
               <SpaceCenterName key={center.id}>{center.name}</SpaceCenterName>
             ))}

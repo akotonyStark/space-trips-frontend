@@ -87,7 +87,7 @@ export const SPACE_CENTERS = [
   {
     id: 4,
     name: 'Kennedy Space Center',
-    planet: 'Earth',
+    planet: 'Mars',
     flights: [
       {
         name: 'Kennedy Flight One',
@@ -120,6 +120,29 @@ export const SPACE_CENTERS = [
         longitude: 22.427,
         image:
           'http://upload.wikimedia.org/wikipedia/commons/thumb/3/36/SeattleI5Skyline.jpg/240px-SeattleI5Skyline.jpg',
+      },
+    ],
+  },
+  {
+    id: 5,
+    name: 'Nyasia Isla Space Center',
+    planet: 'Earth',
+    flights: [
+      {
+        name: 'Nyasia Flight One',
+        departureTime: '9/20/2019',
+        latitude: 41.579606918652054,
+        longitude: 4.244298260567439,
+        image:
+          'http://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Above_Gotham.jpg/240px-Above_Gotham.jpg',
+      },
+      {
+        name: 'Nyasia Flight Two',
+        departureTime: '9/20/2019',
+        latitude: 45.579606918652054,
+        longitude: 4.244298260567439,
+        image:
+          'http://upload.wikimedia.org/wikipedia/commons/thumb/5/57/LA_Skyline_Mountains2.jpg/240px-LA_Skyline_Mountains2.jpg',
       },
     ],
   },

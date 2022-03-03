@@ -1,12 +1,12 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import TripCard from './TripCard'
+import { AppContext } from '../App'
 
-const List = () => {
+const List = ({ trips }) => {
   return (
     <div className='space-body'>
-      <TripCard />
-      <TripCard />
-      <TripCard />
+      {trips.length > 0 &&
+        trips.map((center, index) => <TripCard key={index} center={center} />)}
     </div>
   )
 }
