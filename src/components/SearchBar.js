@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import styled from 'styled-components'
 import arrow from '../assets/icons/Arrow.svg'
 import SearchInput from './SearchInput'
+import { AppContext } from '../App'
 
 const StyledMenu = styled.div`
   padding-left: 5%;
@@ -29,13 +30,30 @@ const StyledButton = styled.div`
   justify-content: center;
 `
 
+const SpaceCenters = styled.select`
+  color: #f1f1f1;
+  background-color: inherit;
+  height: 30px;
+  width: 60%;
+  padding-left: 10px;
+  border: 0px;
+`
+const SpaceCenterName = styled.option`
+  color: #000;
+`
+
 const SearchBar = () => {
+  const [spaceCenters, setSpaceCenters] = useContext(AppContext)
   return (
     <div className='map-header'>
       <StyledMenu>
         <StyledMenuItem>
           <span>Departure</span>
-          <SearchInput />
+          <SpaceCenters onChange={(e) => console.log(e.target.value)}>
+            {spaceCenters.map((center) => (
+              <SpaceCenterName key={center.id}>{center.name}</SpaceCenterName>
+            ))}
+          </SpaceCenters>
         </StyledMenuItem>
 
         <StyledMenuItem>
