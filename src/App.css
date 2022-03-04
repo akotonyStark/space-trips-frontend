@@ -31,8 +31,8 @@ html {
 }
 
 .space-body {
-  width: 35%;
-  height: 80vh;
+  width: 100%;
+  height: 93vh;
   background: #fafafb;
   max-height: 85vh;
   overflow: auto;
@@ -50,6 +50,15 @@ html {
   width: 65%;
   height: 93vh;
   background: #000;
+}
+
+.pagination {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 5vh;
+  width: 100%;
+  /* background-color: red; */
 }
 
 .trip-card:hover {
@@ -82,6 +91,12 @@ html {
 .datetime-picker {
   border: 0px;
   background-color: inherit;
+}
+
+.side-bar {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 }
 
 @media screen and (max-width: 1920px) {

@@ -1,6 +1,14 @@
-import React from 'react'
-import TripCard from './TripCard'
-import { AppContext } from '../App'
+import React from "react";
+import TripCard from "./TripCard";
+import { AppContext } from "../App";
+import styled from "styled-components";
+
+const StyledButton = styled.button`
+  background: gold;
+  border: none;
+  color: white;
+  height: 100%;
+`;
 
 const List = () => {
   const [
@@ -14,26 +22,29 @@ const List = () => {
     setHovered,
     marker,
     setMarker,
-  ] = React.useContext(AppContext)
+  ] = React.useContext(AppContext);
 
   return (
-    <div className='space-body'>
-      {trips.length > 0 &&
-        trips.map((spaceCenter) => (
-          <TripCard
-            key={spaceCenter.id}
-            spaceCenter={spaceCenter}
-            setHovered={setHovered}
-            marker={marker}
-            setMarker={marker}
-          />
-        ))}
-
-      <div>
-        <button>Next Page</button>
+    <div className="side-bar">
+      <div className="space-body">
+        {trips.length > 0 &&
+          trips.map((spaceCenter) => (
+            <TripCard
+              key={spaceCenter.id}
+              spaceCenter={spaceCenter}
+              setHovered={setHovered}
+              marker={marker}
+              setMarker={marker}
+            />
+          ))}
+      </div>
+      <div className="container pagination">
+        <StyledButton>Prev page</StyledButton>
+        <code>Page 1 of 10</code>
+        <StyledButton>Next page</StyledButton>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default List
+export default List;
