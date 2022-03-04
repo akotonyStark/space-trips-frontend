@@ -1,6 +1,9 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef, useEffect, useContext } from 'react'
 import styled from 'styled-components'
 import { useSearchBox } from 'react-instantsearch-hooks'
+
+import { AppContext } from '../App'
+import { useHits } from 'react-instantsearch-hooks'
 
 const StyledInput = styled.input`
   color: #f1f1f1;
@@ -11,38 +14,39 @@ const StyledInput = styled.input`
   border: 0px;
 `
 
+const ResultsItem = styled.div`
+  color: black;
+  border-bottom: 1px solid #cecece;
+  padding: 8px;
+`
+
+const StyledHits = styled.div`
+  background: white;
+  position: absolute;
+  width: inherit;
+  z-index: 1000;
+  margin: 0;
+  max-height: 200px;
+  overflow: auto;
+`
+
 const SearchInput = (props) => {
-  const { query, refine, isSearchStalled } = useSearchBox(props)
+  const { query, refine } = useSearchBox(props)
   const [inputValue, setInputValue] = useState(query)
   const inputRef = useRef(null)
+  const [isSearching, setIsSearching] = useState(false)
 
-  function handleSubmit(event) {
-    event.preventDefault()
-    event.stopPropagation()
+  const { hits } = useHits()
 
-    if (inputRef.current) {
-      inputRef.current.blur()
-    }
-  }
+  const [, setSpaceCenters, , ,] = useContext(AppContext)
 
-  function handleReset(event) {
-    event.preventDefault()
-    event.stopPropagation()
-
-    setInputValue('')
-
-    if (inputRef.current) {
-      inputRef.current.focus()
-    }
-  }
-
-  // Track when the value coming from the React state changes to synchronize
-  // it with InstantSearch.
   useEffect(() => {
     if (query !== inputValue) {
       refine(inputValue)
     }
-  }, [inputValue, refine])
+
+    setSpaceCenters(hits)
+  }, [inputValue, refine, hits, query])
 
   // Track when the InstantSearch query changes to synchronize it with
   // the React state.
@@ -64,8 +68,24 @@ const SearchInput = (props) => {
         autoCapitalize='off'
         type='search'
         value={inputValue}
+        onKeyUp={() => setIsSearching(true)}
         onChange={(event) => setInputValue(event.currentTarget.value)}
       />
+
+      <StyledHits>
+        {isSearching &&
+          hits.map((res) => (
+            <ResultsItem
+              key={res.objectID}
+              onClick={() => {
+                setIsSearching(false)
+                setInputValue(res.name)
+              }}
+            >
+              {res.name}
+            </ResultsItem>
+          ))}
+      </StyledHits>
     </div>
   )
 }

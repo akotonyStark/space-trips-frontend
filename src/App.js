@@ -9,7 +9,7 @@ import { SPACE_CENTERS } from './data/store'
 export const AppContext = createContext()
 
 function App() {
-  const [spaceCenters, setSpaceCenters] = React.useState(SPACE_CENTERS)
+  const [spaceCenters, setSpaceCenters] = React.useState([])
   const [trips, setTrips] = React.useState(SPACE_CENTERS)
   const [viewState, setViewState] = React.useState({
     width: '100%',
@@ -35,6 +35,7 @@ function App() {
     <AppContext.Provider
       value={[
         spaceCenters,
+        setSpaceCenters,
         trips,
         setTrips,
         viewState,

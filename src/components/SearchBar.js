@@ -1,17 +1,12 @@
-import React, { useContext, useState } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import arrow from '../assets/icons/Arrow.svg'
-import { AppContext } from '../App'
+
 import DateTimePicker from 'react-datetime-picker'
 import SearchInput from './SearchInput'
 
 import algoliasearch from 'algoliasearch/lite'
-import {
-  InstantSearch,
-  Hits,
-  SearchBox,
-  Highlight,
-} from 'react-instantsearch-hooks'
+import { InstantSearch } from 'react-instantsearch-hooks'
 
 const searchClient = algoliasearch(
   'UORHJCOG49',
@@ -57,45 +52,17 @@ const SpaceCenterName = styled.option`
 `
 
 const SearchBar = () => {
-  const [spaceCenters, , setTrips, viewState, setViewState] =
-    useContext(AppContext)
-
-  const [depatureDate, setdepatureDate] = useState(new Date('2019/9/20'))
-
-  const handleSelectChage = (name) => {
-    let res = spaceCenters.filter((center) => center.name === name)
-
-    setTrips((prev) => res)
-    setViewState({
-      ...viewState,
-      longitude: res[0].longitude,
-      latitude: res[0].latitude,
-    })
-  }
+  // const [depatureDate, setdepatureDate] = useState(new Date('2019/9/20'))
 
   return (
     <div className='map-header'>
       <StyledMenu>
         <StyledMenuItem>
           <span>Departure</span>
-          {/* <SpaceCenters onChange={(e) => handleSelectChage(e.target.value)}>
-            {spaceCenters.map((center) => (
-              <SpaceCenterName key={center.id}>{center.name}</SpaceCenterName>
-            ))}
-          </SpaceCenters> */}
 
-          <>
-            <InstantSearch
-              indexName='space-centers'
-              searchClient={searchClient}
-            >
-              <div>
-                {/* <SearchBox className='search-input'  /> */}
-                {/* <Hits hitComponent={Hit} /> */}
-              </div>
-              <SearchInput />
-            </InstantSearch>
-          </>
+          <InstantSearch indexName='space-centers' searchClient={searchClient}>
+            <SearchInput />
+          </InstantSearch>
         </StyledMenuItem>
 
         <StyledMenuItem>
@@ -113,14 +80,6 @@ const SearchBar = () => {
       <StyledButton>
         <img src={arrow} alt='arrow' />
       </StyledButton>
-    </div>
-  )
-}
-
-function Hit(props) {
-  return (
-    <div>
-      <ul>{props.hit.name}</ul>
     </div>
   )
 }

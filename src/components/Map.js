@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useContext } from 'react'
+import React, { useState, useMemo, useContext, useEffect } from 'react'
 import Map, {
   Marker,
   Popup,
@@ -10,30 +10,43 @@ import Map, {
 
 import YellowPin from '../assets/marker.png'
 import RedPin from '../assets/red.png'
+import space_image from '../assets/space_image.png'
 
 import { AppContext } from '../App'
 
 const MapBody = ({ hovered }) => {
   const [popupInfo, setPopupInfo] = useState(null)
-  const [, trips, , viewState, ,] = useContext(AppContext)
+  const [spaceCenters, , , viewState] = useContext(AppContext)
+
+  useEffect(() => {
+    console.log(spaceCenters)
+  }, [spaceCenters])
 
   const pins = useMemo(
     () =>
-      trips.map((trip, index) => (
+      spaceCenters.map((center, index) => (
         <Marker
           key={`marker-${index}`}
-          longitude={trip.longitude}
-          latitude={trip.latitude}
+          longitude={center['_geoloc'].lng}
+          latitude={center['_geoloc'].lat}
           anchor='bottom'
         >
           {!hovered ? (
-            <img src={YellowPin} onClick={() => setPopupInfo(trip)} />
+            <img
+              src={YellowPin}
+              alt='yellow-image'
+              onClick={() => setPopupInfo({ ...center, image: space_image })}
+            />
           ) : (
-            <img src={RedPin} onClick={() => setPopupInfo(trip)} />
+            <img
+              src={RedPin}
+              alt='red-image'
+              onClick={() => setPopupInfo({ ...center, image: space_image })}
+            />
           )}
         </Marker>
       )),
-    [trips]
+    [spaceCenters, hovered]
   )
 
   return (
@@ -51,8 +64,8 @@ const MapBody = ({ hovered }) => {
         {popupInfo && (
           <Popup
             anchor='bottom'
-            longitude={Number(popupInfo.longitude)}
-            latitude={Number(popupInfo.latitude)}
+            longitude={Number(popupInfo['_geoloc'].lng)}
+            latitude={Number(popupInfo['_geoloc'].lat)}
             closeOnClick={false}
             onClose={() => setPopupInfo(null)}
           >
@@ -62,6 +75,7 @@ const MapBody = ({ hovered }) => {
               alt='marker'
               style={{ height: 150 }}
               onClick={() => setPopupInfo(null)}
+              title={popupInfo.description}
             />
             <div
               style={{

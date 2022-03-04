@@ -3,7 +3,7 @@ import TripCard from './TripCard'
 import { AppContext } from '../App'
 
 const List = () => {
-  const [, trips, , , , , handleHover] = React.useContext(AppContext)
+  const [, , trips, , , , , handleHover] = React.useContext(AppContext)
   return (
     <div className='space-body'>
       {trips.length > 0 &&
