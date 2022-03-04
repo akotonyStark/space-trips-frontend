@@ -5,6 +5,10 @@ body {
   margin: 0;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 .App {
   width: 70%;
   margin: 0 auto;
@@ -29,9 +33,9 @@ body {
 
 .space-body {
   width: 35%;
-  height: 100vh;
+  height: 85vh;
   background: #fafafb;
-  max-height: 100vh;
+  max-height: 85vh;
   overflow: auto;
 }
 .map-header {
@@ -45,7 +49,7 @@ body {
 
 .map-body {
   width: 65%;
-  height: 100vh;
+  height: 95vh;
   background: #000;
 }
 

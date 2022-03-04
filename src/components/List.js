@@ -7,13 +7,17 @@ const List = () => {
   return (
     <div className='space-body'>
       {trips.length > 0 &&
-        trips.map((spaceCenter, index) => (
+        trips.map((spaceCenter) => (
           <TripCard
-            key={index}
+            key={spaceCenter.id}
             spaceCenter={spaceCenter}
-            handleHover={handleHover}
+            handleHover={() => handleHover(spaceCenter)}
           />
         ))}
+
+      <div>
+        <button>Next Page</button>
+      </div>
     </div>
   )
 }

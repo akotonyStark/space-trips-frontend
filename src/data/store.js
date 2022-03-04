@@ -1,12 +1,8 @@
-export const SPACE_CENTERS = [
+export const TRIPS = [
   {
     id: 1,
     name: 'Nyasia Isla Space Center',
     planet: 'Earth',
-    image:
-      'http://upload.wikimedia.org/wikipedia/commons/thumb/5/57/LA_Skyline_Mountains2.jpg/240px-LA_Skyline_Mountains2.jpg',
-    latitude: 41.579606918652054,
-    longitude: 4.244298260567439,
     flights: [
       {
         name: 'Nyasia Flight One',
@@ -30,10 +26,6 @@ export const SPACE_CENTERS = [
     id: 2,
     name: 'Kennedy Space Center',
     planet: 'Earth',
-    latitude: 51.579606918652054,
-    longitude: 14.244298260567439,
-    image:
-      'http://upload.wikimedia.org/wikipedia/commons/thumb/9/97/Austin2012-12-01.JPG/240px-Austin2012-12-01.JPG',
     flights: [
       {
         name: 'Kennedy Flight One',
@@ -66,12 +58,6 @@ export const SPACE_CENTERS = [
     id: 3,
     name: 'Nyasia Isla Space Center',
     planet: 'Earth',
-    latitude: 31.579606918652054,
-    longitude: 9.244298260567439,
-
-    image:
-      'http://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Above_Gotham.jpg/240px-Above_Gotham.jpg',
-
     flights: [
       {
         name: 'Nyasia Flight One',
@@ -95,10 +81,6 @@ export const SPACE_CENTERS = [
     id: 4,
     name: 'Kennedy Space Center',
     planet: 'Mars',
-    latitude: 61.579606918652054,
-    longitude: 10.244298260567439,
-    image:
-      'http://upload.wikimedia.org/wikipedia/commons/thumb/3/36/SeattleI5Skyline.jpg/240px-SeattleI5Skyline.jpg',
     flights: [
       {
         name: 'Kennedy Flight One',
@@ -138,10 +120,6 @@ export const SPACE_CENTERS = [
     id: 5,
     name: 'Nyasia Isla Space Center',
     planet: 'Earth',
-    latitude: 47.6205,
-    longitude: 2.3509,
-    image:
-      'http://upload.wikimedia.org/wikipedia/commons/thumb/5/57/LA_Skyline_Mountains2.jpg/240px-LA_Skyline_Mountains2.jpg',
     flights: [
       {
         name: 'Nyasia Flight One',

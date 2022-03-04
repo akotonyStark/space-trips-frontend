@@ -14,13 +14,39 @@ import space_image from '../assets/space_image.png'
 
 import { AppContext } from '../App'
 
-const MapBody = ({ hovered }) => {
+const MapBody = () => {
   const [popupInfo, setPopupInfo] = useState(null)
-  const [spaceCenters, , , viewState] = useContext(AppContext)
+  const [
+    spaceCenters,
+    setSpaceCenters,
+    trips,
+    setTrips,
+    viewState,
+    setViewState,
+    hovered,
+    handleHover,
+  ] = useContext(AppContext)
 
   useEffect(() => {
-    console.log(spaceCenters)
+    // console.log(spaceCenters)
   }, [spaceCenters])
+
+  const handleInteraction = (sp_center) => {
+    setPopupInfo({ ...sp_center, image: space_image })
+    // setViewState({
+    //   ...viewState,
+    //   latitude: sp_center['_geoloc'].lat,
+    //   longitude: sp_center['_geoloc'].lng,
+    // })
+  }
+
+  const handleMarkerInteraction = (sp_center) => {
+    setPopupInfo({ ...sp_center, image: space_image })
+    window.scrollTo(
+      0,
+      document.querySelector(sp_center.name.split(' ').join('-'))
+    )
+  }
 
   const pins = useMemo(
     () =>
@@ -32,17 +58,22 @@ const MapBody = ({ hovered }) => {
           anchor='bottom'
         >
           {!hovered ? (
-            <img
-              src={YellowPin}
-              alt='yellow-image'
-              onClick={() => setPopupInfo({ ...center, image: space_image })}
-            />
+            <a href={`#${center.name.split(' ').join('-')}`}>
+              <img
+                src={YellowPin}
+                alt='yellow-image'
+                onClick={() => handleMarkerInteraction(center)}
+              />
+            </a>
           ) : (
-            <img
-              src={RedPin}
-              alt='red-image'
-              onClick={() => setPopupInfo({ ...center, image: space_image })}
-            />
+            <a href={`#${center.name.split(' ').join('-')}`}>
+              <img
+                href={`#${center.name.split(' ').join('-')}`}
+                src={RedPin}
+                alt='red-image'
+                onClick={() => handleMarkerInteraction(center)}
+              />
+            </a>
           )}
         </Marker>
       )),

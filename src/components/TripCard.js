@@ -30,7 +30,11 @@ const StyledButton = styled.div`
 const TripCard = ({ spaceCenter, handleHover }) => {
   return (
     <div>
-      <StyledCard className='trip-card' onMouseOver={handleHover}>
+      <StyledCard
+        className='trip-card'
+        id={spaceCenter.name.split(' ').join('-')}
+        onMouseOver={() => handleHover(spaceCenter)}
+      >
         <div style={{ padding: 10 }}>
           <div
             style={{
@@ -42,10 +46,8 @@ const TripCard = ({ spaceCenter, handleHover }) => {
             <span className='trip-title'>{spaceCenter.name}</span>
             <img src={rocket} alt={rocket} />
           </div>
-          <span className='trip-planet'>{spaceCenter.planet}</span>
-          <p style={{ marginTop: 30 }}>
-            {spaceCenter.flights.length} departures planned today
-          </p>
+          <span className='trip-planet'>{spaceCenter.planet.name}</span>
+          <p style={{ marginTop: 30 }}>12 departures planned today</p>
         </div>
 
         <StyledButton>SEE ALL FLIGHTS</StyledButton>
