@@ -43,13 +43,8 @@ function App() {
     pitch: 0,
     transitionDuration: 1000,
   })
-  const [hovered, setHovered] = useState(false)
-
-  const handleHover = (selectedCard) => {
-    if (spaceCenters.filter((item) => item.name === selectedCard.name)) {
-      setHovered(!hovered)
-    }
-  }
+  const [hovered, setHovered] = useState({ id: '', state: false })
+  const [marker, setMarker] = React.useState({ id: '', isBouncing: false })
 
   const getSpaceTrips = () => {
     client
@@ -86,8 +81,8 @@ function App() {
 
   React.useEffect(() => {
     getSpaceTrips()
-    console.log(hovered)
-  }, [])
+    console.log(marker)
+  }, [hovered, marker])
 
   return (
     <AppContext.Provider
@@ -99,7 +94,9 @@ function App() {
         viewState,
         setViewState,
         hovered,
-        handleHover,
+        setHovered,
+        marker,
+        setMarker,
       ]}
     >
       <div className='App'>

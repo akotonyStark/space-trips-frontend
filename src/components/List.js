@@ -3,7 +3,19 @@ import TripCard from './TripCard'
 import { AppContext } from '../App'
 
 const List = () => {
-  const [, , trips, , , , , handleHover] = React.useContext(AppContext)
+  const [
+    spaceCenters,
+    setSpaceCenters,
+    trips,
+    setTrips,
+    viewState,
+    setViewState,
+    hovered,
+    setHovered,
+    marker,
+    setMarker,
+  ] = React.useContext(AppContext)
+
   return (
     <div className='space-body'>
       {trips.length > 0 &&
@@ -11,7 +23,9 @@ const List = () => {
           <TripCard
             key={spaceCenter.id}
             spaceCenter={spaceCenter}
-            handleHover={() => handleHover(spaceCenter)}
+            setHovered={setHovered}
+            marker={marker}
+            setMarker={marker}
           />
         ))}
 

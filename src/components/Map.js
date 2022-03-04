@@ -24,53 +24,42 @@ const MapBody = () => {
     viewState,
     setViewState,
     hovered,
-    handleHover,
+    setHovered,
+    marker,
+    setMarker,
   ] = useContext(AppContext)
 
   useEffect(() => {
     // console.log(spaceCenters)
   }, [spaceCenters])
 
-  const handleInteraction = (sp_center) => {
-    setPopupInfo({ ...sp_center, image: space_image })
-    // setViewState({
-    //   ...viewState,
-    //   latitude: sp_center['_geoloc'].lat,
-    //   longitude: sp_center['_geoloc'].lng,
-    // })
-  }
-
   const handleMarkerInteraction = (sp_center) => {
     setPopupInfo({ ...sp_center, image: space_image })
-    window.scrollTo(
-      0,
-      document.querySelector(sp_center.name.split(' ').join('-'))
-    )
+    setMarker({ id: sp_center.name.split(' ').join('-'), isBouncing: true })
   }
 
   const pins = useMemo(
     () =>
-      spaceCenters.map((center, index) => (
+      trips.map((center, index) => (
         <Marker
           key={`marker-${index}`}
-          longitude={center['_geoloc'].lng}
-          latitude={center['_geoloc'].lat}
+          longitude={center.longitude}
+          latitude={center.latitude}
           anchor='bottom'
         >
-          {!hovered ? (
+          {hovered.state && hovered.id == center.name.split(' ').join('-') ? (
             <a href={`#${center.name.split(' ').join('-')}`}>
               <img
-                src={YellowPin}
-                alt='yellow-image'
+                src={RedPin}
+                alt='red-image'
                 onClick={() => handleMarkerInteraction(center)}
               />
             </a>
           ) : (
             <a href={`#${center.name.split(' ').join('-')}`}>
               <img
-                href={`#${center.name.split(' ').join('-')}`}
-                src={RedPin}
-                alt='red-image'
+                src={YellowPin}
+                alt='yellow-image'
                 onClick={() => handleMarkerInteraction(center)}
               />
             </a>
@@ -95,8 +84,8 @@ const MapBody = () => {
         {popupInfo && (
           <Popup
             anchor='bottom'
-            longitude={Number(popupInfo['_geoloc'].lng)}
-            latitude={Number(popupInfo['_geoloc'].lat)}
+            longitude={Number(popupInfo.longitude)}
+            latitude={Number(popupInfo.latitude)}
             closeOnClick={false}
             onClose={() => setPopupInfo(null)}
           >

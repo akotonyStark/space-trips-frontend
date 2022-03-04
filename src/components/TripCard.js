@@ -1,6 +1,13 @@
 import React from 'react'
 import styled from 'styled-components'
 import rocket from '../assets/icons/Rocket@2x.svg'
+import { bounce } from 'react-animations'
+import { keyframes } from 'styled-components'
+import { hover } from '@testing-library/user-event/dist/hover'
+
+const Bounce = styled.img`
+  animation: 2s ${keyframes`${bounce}`} infinite;
+`
 
 const StyledCard = styled.div`
   width: 80%;
@@ -27,13 +34,24 @@ const StyledButton = styled.div`
   font-size: 12px;
 `
 
-const TripCard = ({ spaceCenter, handleHover }) => {
+const TripCard = ({ spaceCenter, setHovered, marker }) => {
   return (
     <div>
       <StyledCard
         className='trip-card'
         id={spaceCenter.name.split(' ').join('-')}
-        onMouseOver={() => handleHover(spaceCenter)}
+        onMouseEnter={() =>
+          setHovered({
+            id: spaceCenter.name.split(' ').join('-'),
+            state: true,
+          })
+        }
+        onMouseLeave={() =>
+          setHovered({
+            id: spaceCenter.name.split(' ').join('-'),
+            state: false,
+          })
+        }
       >
         <div style={{ padding: 10 }}>
           <div
@@ -44,7 +62,12 @@ const TripCard = ({ spaceCenter, handleHover }) => {
             }}
           >
             <span className='trip-title'>{spaceCenter.name}</span>
-            <img src={rocket} alt={rocket} />
+            {marker.isBouncing &&
+            marker.id == spaceCenter.name.split(' ').join('-') ? (
+              <Bounce src={rocket} alt={rocket} />
+            ) : (
+              <img src={rocket} alt={rocket} />
+            )}
           </div>
           <span className='trip-planet'>{spaceCenter.planet.name}</span>
           <p style={{ marginTop: 30 }}>12 departures planned today</p>
