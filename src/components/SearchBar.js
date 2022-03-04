@@ -3,6 +3,20 @@ import styled from 'styled-components'
 import arrow from '../assets/icons/Arrow.svg'
 import { AppContext } from '../App'
 import DateTimePicker from 'react-datetime-picker'
+import SearchInput from './SearchInput'
+
+import algoliasearch from 'algoliasearch/lite'
+import {
+  InstantSearch,
+  Hits,
+  SearchBox,
+  Highlight,
+} from 'react-instantsearch-hooks'
+
+const searchClient = algoliasearch(
+  'UORHJCOG49',
+  '74fb98e8049e4753ce230f010774b425'
+)
 
 const StyledMenu = styled.div`
   padding-left: 5%;
@@ -64,11 +78,24 @@ const SearchBar = () => {
       <StyledMenu>
         <StyledMenuItem>
           <span>Departure</span>
-          <SpaceCenters onChange={(e) => handleSelectChage(e.target.value)}>
+          {/* <SpaceCenters onChange={(e) => handleSelectChage(e.target.value)}>
             {spaceCenters.map((center) => (
               <SpaceCenterName key={center.id}>{center.name}</SpaceCenterName>
             ))}
-          </SpaceCenters>
+          </SpaceCenters> */}
+
+          <>
+            <InstantSearch
+              indexName='space-centers'
+              searchClient={searchClient}
+            >
+              <div>
+                {/* <SearchBox className='search-input'  /> */}
+                {/* <Hits hitComponent={Hit} /> */}
+              </div>
+              <SearchInput />
+            </InstantSearch>
+          </>
         </StyledMenuItem>
 
         <StyledMenuItem>
@@ -86,6 +113,14 @@ const SearchBar = () => {
       <StyledButton>
         <img src={arrow} alt='arrow' />
       </StyledButton>
+    </div>
+  )
+}
+
+function Hit(props) {
+  return (
+    <div>
+      <ul>{props.hit.name}</ul>
     </div>
   )
 }
