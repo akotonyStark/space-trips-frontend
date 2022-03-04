@@ -6,7 +6,7 @@ import TripsHeader from './components/TripsHeader'
 import React, { createContext, useState } from 'react'
 import { ApolloClient, InMemoryCache, gql, HttpLink } from '@apollo/client'
 
-const TRIPS = './data/store'
+import { TRIPS } from './data/store.js'
 
 export const AppContext = createContext()
 
@@ -69,11 +69,15 @@ function App() {
         // console.log(result.data.spaceCenters.nodes)
         setTrips(result.data.spaceCenters.nodes)
       })
+      .catch((err) => {
+        console.log('could not load data')
+        console.log('...reverting to offline data')
+        setTrips(TRIPS.spaceCenters.nodes)
+      })
   }
 
   React.useEffect(() => {
     getSpaceTrips()
-    console.log(TRIPS)
   }, [hovered, marker])
 
   return (
