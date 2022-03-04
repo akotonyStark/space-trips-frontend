@@ -2,7 +2,7 @@ html,
 body {
   height: 100%;
   width: 100%;
-  margin: 0;
+  margin: 0 auto;
 }
 
 html {
@@ -10,7 +10,7 @@ html {
 }
 
 .App {
-  width: 70%;
+  width: 80%;
   margin: 0 auto;
   border: 1px solid #e3e3e3;
 }
@@ -23,17 +23,16 @@ html {
 .space-header {
   display: flex;
   align-items: center;
-  /* justify-content: center; */
   width: 35%;
-  height: 88px;
-  background: #fff;
+  height: 7vh;
+  background: white;
   font-size: 24px;
   font-family: monospace;
 }
 
 .space-body {
   width: 35%;
-  height: 85vh;
+  height: 80vh;
   background: #fafafb;
   max-height: 85vh;
   overflow: auto;
@@ -42,14 +41,14 @@ html {
   display: flex;
   align-items: center;
   width: 65%;
-  height: 88px;
+  height: 7vh;
   background: #333333;
   color: white;
 }
 
 .map-body {
   width: 65%;
-  height: 95vh;
+  height: 93vh;
   background: #000;
 }
 
@@ -85,7 +84,7 @@ html {
   background-color: inherit;
 }
 
-@media screen and (max-width: 1600px) {
+@media screen and (max-width: 1920px) {
   .App {
     width: 100%;
     margin: 0 auto;

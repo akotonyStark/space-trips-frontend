@@ -4,17 +4,9 @@ import SearchBar from './components/SearchBar'
 import TripsList from './components/List'
 import TripsHeader from './components/TripsHeader'
 import React, { createContext, useState } from 'react'
-import {
-  ApolloClient,
-  InMemoryCache,
-  ApolloProvider,
-  useQuery,
-  gql,
-  ApolloLink,
-  HttpLink,
-} from '@apollo/client'
+import { ApolloClient, InMemoryCache, gql, HttpLink } from '@apollo/client'
 
-import { TRIPS } from './data/store'
+const TRIPS = './data/store'
 
 export const AppContext = createContext()
 
@@ -81,7 +73,7 @@ function App() {
 
   React.useEffect(() => {
     getSpaceTrips()
-    console.log(marker)
+    console.log(TRIPS)
   }, [hovered, marker])
 
   return (
