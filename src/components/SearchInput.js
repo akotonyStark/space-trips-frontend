@@ -1,9 +1,9 @@
-import React, { useState, useRef, useEffect, useContext } from 'react'
-import styled from 'styled-components'
-import { useSearchBox } from 'react-instantsearch-hooks'
+import React, { useState, useRef, useEffect, useContext } from "react";
+import styled from "styled-components";
+import { useSearchBox } from "react-instantsearch-hooks";
 
-import { AppContext } from '../App'
-import { useHits } from 'react-instantsearch-hooks'
+import { AppContext } from "../App";
+import { useHits } from "react-instantsearch-hooks";
 
 const StyledInput = styled.input`
   color: #f1f1f1;
@@ -12,13 +12,13 @@ const StyledInput = styled.input`
   width: 100%;
   padding-left: 10px;
   border: 0px;
-`
+`;
 
 const ResultsItem = styled.div`
   color: black;
   border-bottom: 1px solid #cecece;
   padding: 8px;
-`
+`;
 
 const StyledHits = styled.div`
   background: white;
@@ -28,25 +28,36 @@ const StyledHits = styled.div`
   margin: 0;
   max-height: 200px;
   overflow: auto;
-`
+`;
 
 const SearchInput = (props) => {
-  const { query, refine } = useSearchBox(props)
-  const [inputValue, setInputValue] = useState(query)
-  const inputRef = useRef(null)
-  const [isSearching, setIsSearching] = useState(false)
+  const { query, refine } = useSearchBox(props);
+  const [inputValue, setInputValue] = useState(query);
+  const inputRef = useRef(null);
+  const [isSearching, setIsSearching] = useState(false);
 
-  const { hits } = useHits()
+  const { hits } = useHits();
 
-  const [, setSpaceCenters, , ,] = useContext(AppContext)
+  const [
+    spaceCenters,
+    setSpaceCenters,
+    trips,
+    setTrips,
+    viewState,
+    setViewState,
+    hovered,
+    setHovered,
+    marker,
+    setMarker,
+  ] = useContext(AppContext);
 
   useEffect(() => {
     if (query !== inputValue) {
-      refine(inputValue)
+      refine(inputValue);
     }
 
-    setSpaceCenters(hits)
-  }, [inputValue, refine, hits, query])
+    setSpaceCenters(hits);
+  }, [inputValue, refine, hits, query]);
 
   // Track when the InstantSearch query changes to synchronize it with
   // the React state.
@@ -54,19 +65,41 @@ const SearchInput = (props) => {
     // Bypass the state update if the input is focused to avoid concurrent
     // updates when typing.
     if (document.activeElement !== inputRef.current && query !== inputValue) {
-      setInputValue(query)
+      setInputValue(query);
     }
-  }, [query])
+  }, [query]);
+
+  const handleSelectedSearchResult = (res) => {
+    setIsSearching(false);
+    setInputValue(res.name);
+    setViewState((prevState) => ({
+      ...viewState,
+      longitude: Number(res._geoloc.lng),
+      latitude: Number(res._geoloc.lat),
+    }));
+    //scroll to searched element
+    let elementId = res.name.split(" ").join("-");
+    let element = document.getElementById(`${elementId}`);
+
+    if (element) {
+      // scroll to element
+      element.scrollIntoView({
+        behavior: "smooth",
+      });
+    } else {
+      alert(res.name + " is not available on this page, click next");
+    }
+  };
 
   return (
     <div>
       <StyledInput
-        placeholder='Search for Space Trips'
+        placeholder="Search for Space Trips"
         ref={inputRef}
-        autoComplete='off'
-        autoCorrect='off'
-        autoCapitalize='off'
-        type='search'
+        autoComplete="off"
+        autoCorrect="off"
+        autoCapitalize="off"
+        type="search"
         value={inputValue}
         onKeyUp={() => setIsSearching(true)}
         onChange={(event) => setInputValue(event.currentTarget.value)}
@@ -77,17 +110,14 @@ const SearchInput = (props) => {
           hits.map((res) => (
             <ResultsItem
               key={res.objectID}
-              onClick={() => {
-                setIsSearching(false)
-                setInputValue(res.name)
-              }}
+              onClick={() => handleSelectedSearchResult(res)}
             >
               {res.name}
             </ResultsItem>
           ))}
       </StyledHits>
     </div>
-  )
-}
+  );
+};
 
-export default SearchInput
+export default SearchInput;

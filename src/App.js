@@ -11,7 +11,7 @@ import { TRIPS } from "./data/store.js";
 export const AppContext = createContext();
 
 const link = new HttpLink({
-  uri: "http://localhost:3000/graphql",
+  uri: process.env.REACT_APP_API_URL,
   credentials: "same-origin",
   headers: {
     authorization: "Bearer API_KEY",
@@ -22,19 +22,21 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
+const INIT_STATE = {
+  width: "100%",
+  height: 900,
+  latitude: 41.579606918652054,
+  longitude: 4.244298260567439,
+  zoom: 3.5,
+  bearing: 0,
+  pitch: 0,
+  transitionDuration: 1000,
+};
+
 function App() {
   const [spaceCenters, setSpaceCenters] = React.useState([]);
   const [trips, setTrips] = React.useState([]);
-  const [viewState, setViewState] = React.useState({
-    width: "100%",
-    height: 900,
-    latitude: 41.579606918652054,
-    longitude: 4.244298260567439,
-    zoom: 3.5,
-    bearing: 0,
-    pitch: 0,
-    transitionDuration: 1000,
-  });
+  const [viewState, setViewState] = React.useState(INIT_STATE);
   const [hovered, setHovered] = useState({ id: "", state: false });
   const [marker, setMarker] = React.useState({ id: "", isBouncing: false });
 
@@ -78,7 +80,7 @@ function App() {
 
   React.useEffect(() => {
     getSpaceTrips();
-  }, [hovered, marker]);
+  }, []);
 
   return (
     <AppContext.Provider

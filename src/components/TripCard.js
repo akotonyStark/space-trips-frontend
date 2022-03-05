@@ -1,13 +1,12 @@
-import React from 'react'
-import styled from 'styled-components'
-import rocket from '../assets/icons/Rocket@2x.svg'
-import { bounce } from 'react-animations'
-import { keyframes } from 'styled-components'
-import { hover } from '@testing-library/user-event/dist/hover'
+import React from "react";
+import styled from "styled-components";
+import rocket from "../assets/icons/Rocket@2x.svg";
+import { bounce } from "react-animations";
+import { keyframes } from "styled-components";
 
 const Bounce = styled.img`
-  animation: 2s ${keyframes`${bounce}`} infinite;
-`
+  animation: 1s ${keyframes`${bounce}`} infinite;
+`;
 
 const StyledCard = styled.div`
   width: 80%;
@@ -15,12 +14,12 @@ const StyledCard = styled.div`
   margin-top: 35px;
   height: 200px;
   background-color: #fff;
-  border: '1px solid black';
+  border: "1px solid black";
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  font-family: 'Lato';
-`
+  font-family: "Lato";
+`;
 
 const StyledButton = styled.div`
   width: 100%;
@@ -32,23 +31,23 @@ const StyledButton = styled.div`
   align-items: center;
   cursor: pointer;
   font-size: 12px;
-`
+`;
 
 const TripCard = ({ spaceCenter, setHovered, marker }) => {
   return (
     <div>
       <StyledCard
-        className='trip-card'
-        id={spaceCenter.name.split(' ').join('-')}
+        className="trip-card"
+        id={spaceCenter.name.split(" ").join("-")}
         onMouseEnter={() =>
           setHovered({
-            id: spaceCenter.name.split(' ').join('-'),
+            id: spaceCenter.name.split(" ").join("-"),
             state: true,
           })
         }
         onMouseLeave={() =>
           setHovered({
-            id: spaceCenter.name.split(' ').join('-'),
+            id: spaceCenter.name.split(" ").join("-"),
             state: false,
           })
         }
@@ -56,27 +55,27 @@ const TripCard = ({ spaceCenter, setHovered, marker }) => {
         <div style={{ padding: 10 }}>
           <div
             style={{
-              display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'center',
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
             }}
           >
-            <span className='trip-title'>{spaceCenter.name}</span>
+            <span className="trip-title">{spaceCenter.name}</span>
             {marker.isBouncing &&
-            marker.id == spaceCenter.name.split(' ').join('-') ? (
+            marker.id == spaceCenter.name.split(" ").join("-") ? (
               <Bounce src={rocket} alt={rocket} />
             ) : (
               <img src={rocket} alt={rocket} />
             )}
           </div>
-          <span className='trip-planet'>{spaceCenter.planet.name}</span>
+          <span className="trip-planet">{spaceCenter.planet.name}</span>
           <p style={{ marginTop: 30 }}>12 departures planned today</p>
         </div>
 
         <StyledButton>SEE ALL FLIGHTS</StyledButton>
       </StyledCard>
     </div>
-  )
-}
+  );
+};
 
-export default TripCard
+export default TripCard;
