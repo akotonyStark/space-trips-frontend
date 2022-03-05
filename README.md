@@ -1,70 +1,60 @@
-# Getting Started with Create React App
+# Strapi Front-End Test
+
+A guide to the source code for theSpacetrip booking application
+
+---
+
+## Table of Content
+
+- [Specifications](#Prerequisites)
+- [Installation](#Installation)
+- [HowItWorks](#HowItWorks)
+
+## Prerequisites
+
+In order to get the project up and running, make sure you have the following installed on your machine:
+
+- Node
+- Docker
+
+## Installation
+
+- In order to start the containers, to get the backend up and running, run the following in a terminal (with the [`docker-compose.yml`] file ):
+
+```sh
+$ docker-compose up -d
+```
+
+This will run your server on `http://localhost:3000/graphql`.
+
+- In the project directory, you can run:
+
+`npm start`
+
+Runs the app in the development mode.\
+Open [http://localhost:3001]to view it in your browser. Port number 3000 will be taken if the server is run first
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## HowItWorks
 
-In the project directory, you can run:
+- The map shows the different Space centers across the world and put a marker at their positions.
 
-### `npm start`
+- When the user navigates on the map it updates the visible Space centers on the map
+- When the user clicks on a marker of the map, the list is scrolled to the selected element and the list item rocket icon bounces for 3s
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- When the user clicks on a marker of the map, it shows a popup with the Space center details
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- The map communicates with the `<List />` component to scroll to the selected element.
 
-### `npm test`
+- The searchbar component shows two fields that acts as filters on the map and the list
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- The searchbar communicates with the `<List />` component to scroll to the selected element.
 
-### `npm run build`
+- The searchbar communicates with the `<Map />` component to center it on the selected Space center position.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- When the user hovers a card, it changes the color of the according Space center marker on the map
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- The list communicates with the `<Map />` component to change the color of the marker from yellow to red
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Enjoy Space Trips

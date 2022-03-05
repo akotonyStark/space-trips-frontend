@@ -28,9 +28,9 @@ const List = () => {
     <div className="side-bar">
       <div className="space-body">
         {trips.length > 0 &&
-          trips.map((spaceCenter) => (
+          trips.map((spaceCenter, index) => (
             <TripCard
-              key={spaceCenter.id}
+              key={index}
               spaceCenter={spaceCenter}
               setHovered={setHovered}
               marker={marker}

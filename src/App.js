@@ -7,6 +7,7 @@ import React, { createContext, useState } from "react";
 import { ApolloClient, InMemoryCache, gql, HttpLink } from "@apollo/client";
 
 import { TRIPS } from "./data/store.js";
+import Modal from "./components/Modal";
 
 export const AppContext = createContext();
 
@@ -36,16 +37,18 @@ const INIT_STATE = {
 function App() {
   const [spaceCenters, setSpaceCenters] = React.useState([]);
   const [trips, setTrips] = React.useState([]);
+  const [flights, setFlights] = React.useState([]);
   const [viewState, setViewState] = React.useState(INIT_STATE);
   const [hovered, setHovered] = useState({ id: "", state: false });
   const [marker, setMarker] = React.useState({ id: "", isBouncing: false });
+  const [isModalOpen, setIsModalOpen] = React.useState(false);
 
   const getSpaceTrips = () => {
     client
       .query({
         query: gql`
           query GetSpaceCenters {
-            spaceCenters(pageSize: 1000) {
+            spaceCenters(pageSize: 100) {
               nodes {
                 id
                 name
@@ -68,7 +71,7 @@ function App() {
         `,
       })
       .then((result) => {
-        // console.log(result.data.spaceCenters.nodes)
+        //console.log(result.data.spaceCenters.nodes);
         setTrips(result.data.spaceCenters.nodes);
       })
       .catch((err) => {
@@ -99,13 +102,16 @@ function App() {
     >
       <div className="App">
         <div className="container">
-          <TripsHeader />
+          <TripsHeader setIsModalOpen={setIsModalOpen} />
           <SearchBar />
         </div>
         <div className="container">
           <TripsList />
           <Map />
         </div>
+        {isModalOpen && (
+          <Modal setIsModalOpen={setIsModalOpen} spaceCenters={spaceCenters} />
+        )}
       </div>
     </AppContext.Provider>
   );

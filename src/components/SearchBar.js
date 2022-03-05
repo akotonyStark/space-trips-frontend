@@ -4,9 +4,23 @@ import arrow from "../assets/icons/Arrow.svg";
 
 import DateTimePicker from "react-datetime-picker";
 import SearchInput from "./SearchInput";
+import { AppContext } from "../App";
 
 import algoliasearch from "algoliasearch/lite";
 import { InstantSearch } from "react-instantsearch-hooks";
+import { ApolloClient, InMemoryCache, gql, HttpLink } from "@apollo/client";
+
+const link = new HttpLink({
+  uri: process.env.REACT_APP_API_URL,
+  credentials: "same-origin",
+  headers: {
+    authorization: "Bearer API_KEY",
+  },
+});
+const client = new ApolloClient({
+  link: link,
+  cache: new InMemoryCache(),
+});
 
 const searchClient = algoliasearch(
   "UORHJCOG49",
@@ -40,7 +54,94 @@ const StyledButton = styled.div`
 `;
 
 const SearchBar = () => {
-  // const [depatureDate, setdepatureDate] = useState(new Date('2019/9/20'))
+  const [
+    spaceCenters,
+    setSpaceCenters,
+    trips,
+    setTrips,
+    viewState,
+    setViewState,
+    hovered,
+    setHovered,
+    marker,
+    setMarker,
+  ] = React.useContext(AppContext);
+  const [depatureDate, setdepatureDate] = React.useState(new Date());
+
+  const handleGetFlights = (value) => {
+    let formattedDate = new Date(value);
+    let availableFlights = [];
+    setdepatureDate(formattedDate);
+    //queryFlight
+    client
+      .query({
+        query: gql`
+          query GetFlightsList {
+            flights(pageSize: 100, departureDay: "2019-09-25") {
+              nodes {
+                id
+                code
+                launchSite {
+                  id
+                  uid
+                  name
+                  description
+                  latitude
+                  longitude
+                  planet {
+                    id
+                    name
+                  }
+                }
+                landingSite {
+                  id
+                  uid
+                  name
+                  description
+                  latitude
+                  longitude
+                  planet {
+                    id
+                    name
+                  }
+                }
+                departureAt
+                seatCount
+                availableSeats
+              }
+            }
+          }
+        `,
+      })
+      .then((result) => {
+        let flights = result.data.flights.nodes;
+
+        trips.forEach((trip) => {
+          let flightInfo = [];
+          flights.forEach((flight) => {
+            if (trip.name === flight.launchSite.name) {
+              flightInfo.push({
+                availableSeats: flight.availableSeats,
+                departure: flight.launchSite.name,
+              });
+              let match = {
+                ...trip,
+                flightInfo: flightInfo,
+              };
+              availableFlights.push(match);
+            }
+          });
+        });
+      })
+      .catch((err) => {
+        console.log("error");
+      });
+    console.log(availableFlights);
+  };
+
+  React.useEffect(() => {
+    // console.log(depatureDate);
+  });
 
   return (
     <div className="map-header">
@@ -56,16 +157,20 @@ const SearchBar = () => {
         <StyledMenuItem>
           <div>Departure time</div>
           <div className="datetime-picker">
-            <div>9/20/2019 - 12.45am</div>
-            {/* <DateTimePicker
-              // calendarIcon={null}
-              onChange={(value) => console.log(value)}
+            {/* <div>9/20/2019 - 12.45am</div> */}
+            <DateTimePicker
+              calendarIcon={null}
+              clearIcon={null}
+              onChange={(value) => handleGetFlights(value)}
               value={depatureDate}
-            /> */}
+            />
           </div>
         </StyledMenuItem>
       </StyledMenu>
-      <StyledButton>
+      <StyledButton
+        className="toggle-view"
+        onClick={() => console.log("toggle mobile view")}
+      >
         <img src={arrow} alt="arrow" />
       </StyledButton>
     </div>

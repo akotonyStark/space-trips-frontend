@@ -46,6 +46,7 @@ const MapBody = () => {
     element.scrollIntoView({
       behavior: "smooth",
     });
+
     // element.style.border = "1px solid gold";
     element.style.boxShadow = "0 4px 8px 0 rgba(0, 0, 0, 0.2)";
 

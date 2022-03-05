@@ -63,9 +63,9 @@ const TripCard = ({ spaceCenter, setHovered, marker }) => {
             <span className="trip-title">{spaceCenter.name}</span>
             {marker.isBouncing &&
             marker.id == spaceCenter.name.split(" ").join("-") ? (
-              <Bounce src={rocket} alt={rocket} />
+              <Bounce src={rocket} alt={rocket} className="rocket" />
             ) : (
-              <img src={rocket} alt={rocket} />
+              <img src={rocket} alt={rocket} className="rocket" />
             )}
           </div>
           <span className="trip-planet">{spaceCenter.planet.name}</span>
