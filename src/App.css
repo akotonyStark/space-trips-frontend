@@ -57,16 +57,18 @@ html {
 
 .map-body {
   width: 65%;
-  height: 93vh;
+  height: 90vh;
   background: #000;
 }
 
 .pagination {
+  position: relative;
   display: flex;
   justify-content: space-between;
   align-items: center;
   height: 5vh;
   width: 100%;
+  bottom: 0px;
   /* background-color: red; */
 }
 

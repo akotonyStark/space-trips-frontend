@@ -42,11 +42,10 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 - The map shows the different Space centers across the world and put a marker at their positions.
 
 - When the user navigates on the map it updates the visible Space centers on the map
+
 - When the user clicks on a marker of the map, the list is scrolled to the selected element and the list item rocket icon bounces for 3s
 
 - When the user clicks on a marker of the map, it shows a popup with the Space center details
-
-- The map communicates with the `<List />` component to scroll to the selected element.
 
 - The searchbar component shows two fields that acts as filters on the map and the list
 

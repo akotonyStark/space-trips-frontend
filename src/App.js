@@ -35,6 +35,7 @@ const INIT_STATE = {
 };
 
 function App() {
+  const [page, setPage] = React.useState(1);
   const [spaceCenters, setSpaceCenters] = React.useState([]);
   const [trips, setTrips] = React.useState([]);
   const [flights, setFlights] = React.useState([]);
@@ -47,12 +48,12 @@ function App() {
   ]);
   const [isModalOpen, setIsModalOpen] = React.useState(false);
 
-  const getSpaceTrips = () => {
+  const getSpaceTrips = (page) => {
     client
       .query({
         query: gql`
           query GetSpaceCenters {
-            spaceCenters(pageSize: 100) {
+            spaceCenters(page: ${page}, pageSize: 100) {
               nodes {
                 id
                 uid
@@ -76,7 +77,6 @@ function App() {
         `,
       })
       .then((result) => {
-        //console.log(result.data.spaceCenters.nodes);
         setTrips(result.data.spaceCenters.nodes);
       })
       .catch((err) => {
@@ -89,8 +89,8 @@ function App() {
   const getAllFlights = () => {};
 
   React.useEffect(() => {
-    getSpaceTrips();
-  }, []);
+    getSpaceTrips(page);
+  }, [page]);
 
   return (
     <AppContext.Provider
@@ -107,6 +107,8 @@ function App() {
         setMarker,
         mapCenter,
         setMapCenter,
+        page,
+        setPage,
       ]}
     >
       <div className="App">

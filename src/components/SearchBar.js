@@ -138,7 +138,11 @@ const SearchBar = () => {
         <StyledMenuItem>
           <span>Departure</span>
 
-          <InstantSearch indexName="space-centers" searchClient={searchClient}>
+          <InstantSearch
+            indexName="space-centers"
+            searchClient={searchClient}
+            style={{ width: 400 }}
+          >
             <SearchInput />
           </InstantSearch>
         </StyledMenuItem>
@@ -157,8 +161,8 @@ const SearchBar = () => {
         </StyledMenuItem>
       </StyledMenu>
       <StyledButton
-        className="toggle-view"
-        onClick={() => console.log("toggle mobile view")}
+        className="search-flights"
+        onClick={() => console.log("searching...")}
       >
         <img src={arrow} alt="arrow" />
       </StyledButton>

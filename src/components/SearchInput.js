@@ -60,7 +60,7 @@ const SearchInput = (props) => {
     if (query !== inputValue) {
       refine(inputValue);
     }
-    setSpaceCenters(hits);
+    //setSpaceCenters(hits);
   }, [inputValue, refine, hits]);
 
   // Track when the InstantSearch query changes to synchronize it with

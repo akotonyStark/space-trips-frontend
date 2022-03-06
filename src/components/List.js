@@ -34,7 +34,17 @@ const List = () => {
     setMarker,
     mapCenter,
     setMapCenter,
+    page,
+    setPage,
   ] = React.useContext(AppContext);
+
+  const nextPage = (page) => {
+    setPage((prev) => page + 1);
+  };
+
+  const prevPage = (page) => {
+    setPage((prev) => page - 1);
+  };
 
   return (
     <div className="side-bar">
@@ -62,11 +72,13 @@ const List = () => {
             />
           ))}
       </div>
-      <div className="container pagination">
-        <StyledButton>Prev page</StyledButton>
-        <code>Page 1 of 10</code>
-        <StyledButton>Next page</StyledButton>
-      </div>
+      {trips.length > 0 && (
+        <div className="container pagination">
+          <StyledButton onClick={() => prevPage(page)}>Prev page</StyledButton>
+          <code>Page {page} of 16</code>
+          <StyledButton onClick={() => nextPage(page)}>Next page</StyledButton>
+        </div>
+      )}
     </div>
   );
 };
