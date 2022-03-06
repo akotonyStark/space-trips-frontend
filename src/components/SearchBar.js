@@ -54,18 +54,7 @@ const StyledButton = styled.div`
 `;
 
 const SearchBar = () => {
-  const [
-    spaceCenters,
-    setSpaceCenters,
-    trips,
-    setTrips,
-    viewState,
-    setViewState,
-    hovered,
-    setHovered,
-    marker,
-    setMarker,
-  ] = React.useContext(AppContext);
+  const [, , trips, , , , , , , ,] = React.useContext(AppContext);
   const [depatureDate, setdepatureDate] = React.useState(new Date());
 
   const handleGetFlights = (value) => {
@@ -141,7 +130,7 @@ const SearchBar = () => {
 
   React.useEffect(() => {
     // console.log(depatureDate);
-  });
+  }, []);
 
   return (
     <div className="map-header">

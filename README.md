@@ -9,6 +9,7 @@ A guide to the source code for theSpacetrip booking application
 - [Specifications](#Prerequisites)
 - [Installation](#Installation)
 - [HowItWorks](#HowItWorks)
+- [Mobile](#Mobile)
 
 ## Prerequisites
 
@@ -56,5 +57,9 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 - When the user hovers a card, it changes the color of the according Space center marker on the map
 
 - The list communicates with the `<Map />` component to change the color of the marker from yellow to red
+
+## Mobile
+
+- Reduce window width to less than 500px to view mobile responsive view of space trips
 
 ## Enjoy Space Trips

@@ -62,7 +62,7 @@ const TripCard = ({ spaceCenter, setHovered, marker }) => {
           >
             <span className="trip-title">{spaceCenter.name}</span>
             {marker.isBouncing &&
-            marker.id == spaceCenter.name.split(" ").join("-") ? (
+            marker.id === spaceCenter.name.split(" ").join("-") ? (
               <Bounce src={rocket} alt={rocket} className="rocket" />
             ) : (
               <img src={rocket} alt={rocket} className="rocket" />
@@ -72,7 +72,9 @@ const TripCard = ({ spaceCenter, setHovered, marker }) => {
           <p style={{ marginTop: 30 }}>12 departures planned today</p>
         </div>
 
-        <StyledButton>SEE ALL FLIGHTS</StyledButton>
+        <StyledButton onClick={() => console.log(spaceCenter.uid)}>
+          SEE ALL FLIGHTS
+        </StyledButton>
       </StyledCard>
     </div>
   );

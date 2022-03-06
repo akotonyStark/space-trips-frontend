@@ -11,13 +11,16 @@ const StyledInput = styled.input`
   height: 30px;
   width: 100%;
   padding-left: 10px;
+  padding-right: 10px;
   border: 0px;
+  cursor: pointer;
 `;
 
 const ResultsItem = styled.div`
   color: black;
   border-bottom: 1px solid #cecece;
   padding: 8px;
+  cursor: pointer;
 `;
 
 const StyledHits = styled.div`
@@ -39,16 +42,18 @@ const SearchInput = (props) => {
   const { hits } = useHits();
 
   const [
-    spaceCenters,
+    ,
     setSpaceCenters,
-    trips,
-    setTrips,
+    ,
+    ,
     viewState,
     setViewState,
-    hovered,
-    setHovered,
-    marker,
-    setMarker,
+    ,
+    ,
+    ,
+    ,
+    center,
+    setCenter,
   ] = useContext(AppContext);
 
   useEffect(() => {
@@ -56,7 +61,7 @@ const SearchInput = (props) => {
       refine(inputValue);
     }
     setSpaceCenters(hits);
-  }, [inputValue, refine, hits, query]);
+  }, [inputValue, refine, hits]);
 
   // Track when the InstantSearch query changes to synchronize it with
   // the React state.
@@ -71,11 +76,10 @@ const SearchInput = (props) => {
   const handleSelectedSearchResult = (res) => {
     setIsSearching(false);
     setInputValue(res.name);
-    setViewState((prevState) => ({
-      ...viewState,
-      longitude: Number(res._geoloc.lng),
-      latitude: Number(res._geoloc.lat),
-    }));
+    setCenter((prevState) => [
+      Number(res._geoloc.lng),
+      Number(res._geoloc.lat),
+    ]);
     //scroll to searched element
     let elementId = res.name.split(" ").join("-");
     let element = document.getElementById(`${elementId}`);

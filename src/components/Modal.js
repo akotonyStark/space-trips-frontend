@@ -48,15 +48,15 @@ const Modal = ({ setIsModalOpen, spaceCenters }) => {
       </div>
       <div style={styles.formGroup}>
         <span>Departure</span>
-        <select style={{ height: 100 }}>
+        <select style={{ height: 100, width: "100%" }}>
           {spaceCenters.map((item) => (
-            <option>{item.name}</option>
+            <option key={item.objectID}>{item.name}</option>
           ))}
         </select>
       </div>
       <div style={styles.formGroup}>
         <span>Departure Time</span>
-        <input type="datetime-local" style={{ height: 100 }} />
+        <input type="datetime-local" style={{ height: 100, width: "100%" }} />
       </div>
       <SaveButton onClick={() => setIsModalOpen(false)}>SAVE</SaveButton>
     </div>

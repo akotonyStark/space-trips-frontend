@@ -1,10 +1,9 @@
 import React from "react";
 import styled from "styled-components";
-import { icons } from "react-icons";
+import { FaSearch } from "react-icons/fa";
 
 const StyledTitle = styled.span`
   padding-left: 20px;
-  font-weight: 300;
 `;
 
 const TripsHeader = ({ setIsModalOpen }) => {
@@ -17,7 +16,8 @@ const TripsHeader = ({ setIsModalOpen }) => {
         className="look-for-flight-mobile"
         onClick={() => setIsModalOpen(true)}
       >
-        LOOK FOR A FLIGHT
+        <span style={{ paddingRight: 10 }}>LOOK FOR A FLIGHT</span>
+        <FaSearch />
       </div>
     </>
   );

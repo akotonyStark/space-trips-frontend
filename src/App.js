@@ -41,6 +41,10 @@ function App() {
   const [viewState, setViewState] = React.useState(INIT_STATE);
   const [hovered, setHovered] = useState({ id: "", state: false });
   const [marker, setMarker] = React.useState({ id: "", isBouncing: false });
+  const [center, setCenter] = React.useState([
+    INIT_STATE.longitude,
+    INIT_STATE.latitude,
+  ]);
   const [isModalOpen, setIsModalOpen] = React.useState(false);
 
   const getSpaceTrips = () => {
@@ -51,6 +55,7 @@ function App() {
             spaceCenters(pageSize: 100) {
               nodes {
                 id
+                uid
                 name
                 description
                 latitude
@@ -81,6 +86,8 @@ function App() {
       });
   };
 
+  const getAllFlights = () => {};
+
   React.useEffect(() => {
     getSpaceTrips();
   }, []);
@@ -98,6 +105,8 @@ function App() {
         setHovered,
         marker,
         setMarker,
+        center,
+        setCenter,
       ]}
     >
       <div className="App">

@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useContext, useEffect } from "react";
+import React, { useState, useMemo, useContext, useEffect, useRef } from "react";
 import Map, {
   Marker,
   Popup,
@@ -27,13 +27,30 @@ const MapBody = () => {
     setHovered,
     marker,
     setMarker,
+    center,
+    setCenter,
   ] = useContext(AppContext);
 
-  const markerRef = React.useRef(null);
+  const markerRef = useRef(null);
+  const mapRef = useRef(null);
 
   useEffect(() => {
-    // console.log(viewState);
-  }, [viewState]);
+    // Using easeTo options.
+    setTimeout(() => {
+      mapRef.current.easeTo({
+        center: center,
+        zoom: 3.5,
+        speed: 0.3,
+        curve: 1,
+        duration: 5000,
+        easing(t) {
+          return t;
+        },
+      });
+    }, 1000);
+
+    console.log(center);
+  }, [center]);
 
   const handleMarkerInteraction = (sp_center) => {
     setPopupInfo({ ...sp_center, image: space_image });
@@ -89,6 +106,7 @@ const MapBody = () => {
   return (
     <div className="map-body">
       <Map
+        ref={mapRef}
         id="space-centers-map"
         initialViewState={viewState}
         onMove={(evt) => setViewState(evt.viewState)}
@@ -102,6 +120,7 @@ const MapBody = () => {
 
         {popupInfo && (
           <Popup
+            style={{ cursor: "pointer" }}
             anchor="bottom"
             longitude={Number(popupInfo.longitude)}
             latitude={Number(popupInfo.latitude)}
@@ -124,7 +143,8 @@ const MapBody = () => {
                 fontWeight: "bold",
               }}
             >
-              {popupInfo.name}
+              {popupInfo.name} -{" "}
+              <span style={{ color: "gold" }}>{popupInfo.planet.name}</span>
             </div>
           </Popup>
         )}
