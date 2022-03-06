@@ -41,7 +41,7 @@ function App() {
   const [viewState, setViewState] = React.useState(INIT_STATE);
   const [hovered, setHovered] = useState({ id: "", state: false });
   const [marker, setMarker] = React.useState({ id: "", isBouncing: false });
-  const [center, setCenter] = React.useState([
+  const [mapCenter, setMapCenter] = React.useState([
     INIT_STATE.longitude,
     INIT_STATE.latitude,
   ]);
@@ -105,8 +105,8 @@ function App() {
         setHovered,
         marker,
         setMarker,
-        center,
-        setCenter,
+        mapCenter,
+        setMapCenter,
       ]}
     >
       <div className="App">

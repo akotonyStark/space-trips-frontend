@@ -33,7 +33,7 @@ const StyledButton = styled.div`
   font-size: 12px;
 `;
 
-const TripCard = ({ spaceCenter, setHovered, marker }) => {
+const TripCard = ({ spaceCenter, setHovered, marker, setMapCenter }) => {
   return (
     <div>
       <StyledCard
@@ -50,6 +50,9 @@ const TripCard = ({ spaceCenter, setHovered, marker }) => {
             id: spaceCenter.name.split(" ").join("-"),
             state: false,
           })
+        }
+        onClick={() =>
+          setMapCenter([spaceCenter.longitude, spaceCenter.latitude])
         }
       >
         <div style={{ padding: 10 }}>

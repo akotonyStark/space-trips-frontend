@@ -27,8 +27,8 @@ const MapBody = () => {
     setHovered,
     marker,
     setMarker,
-    center,
-    setCenter,
+    mapCenter,
+    setMapCenter,
   ] = useContext(AppContext);
 
   const markerRef = useRef(null);
@@ -38,7 +38,7 @@ const MapBody = () => {
     // Using easeTo options.
     setTimeout(() => {
       mapRef.current.easeTo({
-        center: center,
+        center: mapCenter,
         zoom: 3.5,
         speed: 0.3,
         curve: 1,
@@ -48,9 +48,7 @@ const MapBody = () => {
         },
       });
     }, 1000);
-
-    console.log(center);
-  }, [center]);
+  }, [mapCenter]);
 
   const handleMarkerInteraction = (sp_center) => {
     setPopupInfo({ ...sp_center, image: space_image });
