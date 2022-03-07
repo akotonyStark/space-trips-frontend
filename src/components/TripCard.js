@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import rocket from "../assets/icons/Rocket@2x.svg";
+import rocket from "../assets/icons/Rocket.svg";
 import { bounce } from "react-animations";
 import { keyframes } from "styled-components";
 

@@ -41,20 +41,7 @@ const SearchInput = (props) => {
 
   const { hits } = useHits();
 
-  const [
-    ,
-    setSpaceCenters,
-    ,
-    ,
-    viewState,
-    setViewState,
-    ,
-    ,
-    ,
-    ,
-    center,
-    setCenter,
-  ] = useContext(AppContext);
+  const { setMapCenter } = useContext(AppContext);
 
   useEffect(() => {
     if (query !== inputValue) {
@@ -73,24 +60,28 @@ const SearchInput = (props) => {
     }
   }, [query]);
 
-  const handleSelectedSearchResult = (res) => {
+  const handleSelectedSearchResult = (selectedItem) => {
     setIsSearching(false);
-    setInputValue(res.name);
-    setCenter((prevState) => [
-      Number(res._geoloc.lng),
-      Number(res._geoloc.lat),
-    ]);
+    setInputValue(selectedItem.name);
+
     //scroll to searched element
-    let elementId = res.name.split(" ").join("-");
+    let elementId = selectedItem.name.split(" ").join("-");
     let element = document.getElementById(`${elementId}`);
 
     if (element) {
+      setMapCenter((prevState) => [
+        Number(selectedItem._geoloc.lng),
+        Number(selectedItem._geoloc.lat),
+      ]);
       // scroll to element
       element.scrollIntoView({
         behavior: "smooth",
       });
     } else {
-      alert(res.name + " is not available on this page, click next");
+      alert(
+        selectedItem.name + " is not available on this page, try the next page"
+      );
+      setInputValue("");
     }
   };
 
@@ -112,6 +103,7 @@ const SearchInput = (props) => {
         {isSearching &&
           hits.map((res) => (
             <ResultsItem
+              className="algolia-results-item"
               key={res.objectID}
               onClick={() => handleSelectedSearchResult(res)}
             >

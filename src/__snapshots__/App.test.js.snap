@@ -1,0 +1,184 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`if hover effect works correctly 1`] = `
+<div>
+  <div
+    className="sc-iCfMLu ibZlOx trip-card"
+    id="Accra-Space-Center"
+    onClick={[Function]}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+  >
+    <div
+      style={
+        Object {
+          "padding": 10,
+        }
+      }
+    >
+      <div
+        style={
+          Object {
+            "alignItems": "center",
+            "display": "flex",
+            "justifyContent": "space-between",
+          }
+        }
+      >
+        <span
+          className="trip-title"
+        >
+          Accra Space Center
+        </span>
+        <img
+          alt="Rocket.svg"
+          className="rocket"
+          src="Rocket.svg"
+        />
+      </div>
+      <span
+        className="trip-planet"
+      >
+        Earth
+      </span>
+      <p
+        style={
+          Object {
+            "marginTop": 30,
+          }
+        }
+      >
+        12 departures planned today
+      </p>
+    </div>
+    <div
+      className="sc-furwcr eqwTlf"
+      onClick={[Function]}
+    >
+      SEE ALL FLIGHTS
+    </div>
+  </div>
+</div>
+`;
+
+exports[`if hover effect works correctly 2`] = `
+<div>
+  <div
+    className="sc-iCfMLu ibZlOx trip-card"
+    id="Accra-Space-Center"
+    onClick={[Function]}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+  >
+    <div
+      style={
+        Object {
+          "padding": 10,
+        }
+      }
+    >
+      <div
+        style={
+          Object {
+            "alignItems": "center",
+            "display": "flex",
+            "justifyContent": "space-between",
+          }
+        }
+      >
+        <span
+          className="trip-title"
+        >
+          Accra Space Center
+        </span>
+        <img
+          alt="Rocket.svg"
+          className="rocket"
+          src="Rocket.svg"
+        />
+      </div>
+      <span
+        className="trip-planet"
+      >
+        Earth
+      </span>
+      <p
+        style={
+          Object {
+            "marginTop": 30,
+          }
+        }
+      >
+        12 departures planned today
+      </p>
+    </div>
+    <div
+      className="sc-furwcr eqwTlf"
+      onClick={[Function]}
+    >
+      SEE ALL FLIGHTS
+    </div>
+  </div>
+</div>
+`;
+
+exports[`if hover effect works correctly 3`] = `
+<div>
+  <div
+    className="sc-iCfMLu ibZlOx trip-card"
+    id="Accra-Space-Center"
+    onClick={[Function]}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+  >
+    <div
+      style={
+        Object {
+          "padding": 10,
+        }
+      }
+    >
+      <div
+        style={
+          Object {
+            "alignItems": "center",
+            "display": "flex",
+            "justifyContent": "space-between",
+          }
+        }
+      >
+        <span
+          className="trip-title"
+        >
+          Accra Space Center
+        </span>
+        <img
+          alt="Rocket.svg"
+          className="rocket"
+          src="Rocket.svg"
+        />
+      </div>
+      <span
+        className="trip-planet"
+      >
+        Earth
+      </span>
+      <p
+        style={
+          Object {
+            "marginTop": 30,
+          }
+        }
+      >
+        12 departures planned today
+      </p>
+    </div>
+    <div
+      className="sc-furwcr eqwTlf"
+      onClick={[Function]}
+    >
+      SEE ALL FLIGHTS
+    </div>
+  </div>
+</div>
+`;

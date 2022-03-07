@@ -94,7 +94,7 @@ function App() {
 
   return (
     <AppContext.Provider
-      value={[
+      value={{
         spaceCenters,
         setSpaceCenters,
         trips,
@@ -109,7 +109,7 @@ function App() {
         setMapCenter,
         page,
         setPage,
-      ]}
+      }}
     >
       <div className="App">
         <div className="container">

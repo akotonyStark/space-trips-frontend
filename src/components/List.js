@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import TripCard from "./TripCard";
 import { AppContext } from "../App";
 import styled from "styled-components";
 import loader from "../assets/loader-one.gif";
 
-const StyledButton = styled.button`
+export const StyledButton = styled.button`
   background: gold;
   border: none;
   color: white;
@@ -21,22 +21,8 @@ const StyledLoader = styled.div`
 `;
 
 const List = () => {
-  const [
-    spaceCenters,
-    setSpaceCenters,
-    trips,
-    setTrips,
-    viewState,
-    setViewState,
-    hovered,
-    setHovered,
-    marker,
-    setMarker,
-    mapCenter,
-    setMapCenter,
-    page,
-    setPage,
-  ] = React.useContext(AppContext);
+  const { trips, setHovered, marker, setMapCenter, page, setPage } =
+    useContext(AppContext);
 
   const nextPage = (page) => {
     setPage((prev) => page + 1);
@@ -74,9 +60,13 @@ const List = () => {
       </div>
       {trips.length > 0 && (
         <div className="container pagination">
-          <StyledButton onClick={() => prevPage(page)}>Prev page</StyledButton>
+          <StyledButton id="prev" onClick={() => prevPage(page)}>
+            Prev page
+          </StyledButton>
           <code>Page {page} of 16</code>
-          <StyledButton onClick={() => nextPage(page)}>Next page</StyledButton>
+          <StyledButton id="next" onClick={() => nextPage(page)}>
+            Next page
+          </StyledButton>
         </div>
       )}
     </div>

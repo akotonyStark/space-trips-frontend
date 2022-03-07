@@ -54,7 +54,22 @@ const StyledButton = styled.div`
 `;
 
 const SearchBar = () => {
-  const [, , trips, , , , , , , ,] = React.useContext(AppContext);
+  const {
+    spaceCenters,
+    setSpaceCenters,
+    trips,
+    setTrips,
+    viewState,
+    setViewState,
+    hovered,
+    setHovered,
+    marker,
+    setMarker,
+    mapCenter,
+    setMapCenter,
+    page,
+    setPage,
+  } = React.useContext(AppContext);
   const [depatureDate, setdepatureDate] = React.useState(new Date());
 
   const handleGetFlights = (value) => {

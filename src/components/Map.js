@@ -16,7 +16,7 @@ import { AppContext } from "../App";
 
 const MapBody = () => {
   const [popupInfo, setPopupInfo] = useState(null);
-  const [
+  const {
     spaceCenters,
     setSpaceCenters,
     trips,
@@ -29,14 +29,16 @@ const MapBody = () => {
     setMarker,
     mapCenter,
     setMapCenter,
-  ] = useContext(AppContext);
+    page,
+    setPage,
+  } = useContext(AppContext);
 
   const markerRef = useRef(null);
   const mapRef = useRef(null);
 
   useEffect(() => {
     // Using easeTo options.
-    setTimeout(() => {
+    if (mapRef.current) {
       mapRef.current.easeTo({
         center: mapCenter,
         zoom: 3.5,
@@ -47,7 +49,7 @@ const MapBody = () => {
           return t;
         },
       });
-    }, 1000);
+    }
   }, [mapCenter]);
 
   const handleMarkerInteraction = (sp_center) => {
