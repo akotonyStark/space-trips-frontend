@@ -3,7 +3,7 @@
 exports[`if hover effect works correctly 1`] = `
 <div>
   <div
-    className="sc-iCfMLu ibZlOx trip-card"
+    className="sc-iCfMLu foJxYF trip-card"
     id="Accra-Space-Center"
     onClick={[Function]}
     onMouseEnter={[Function]}
@@ -64,7 +64,7 @@ exports[`if hover effect works correctly 1`] = `
 exports[`if hover effect works correctly 2`] = `
 <div>
   <div
-    className="sc-iCfMLu ibZlOx trip-card"
+    className="sc-iCfMLu foJxYF trip-card"
     id="Accra-Space-Center"
     onClick={[Function]}
     onMouseEnter={[Function]}
@@ -125,7 +125,7 @@ exports[`if hover effect works correctly 2`] = `
 exports[`if hover effect works correctly 3`] = `
 <div>
   <div
-    className="sc-iCfMLu ibZlOx trip-card"
+    className="sc-iCfMLu foJxYF trip-card"
     id="Accra-Space-Center"
     onClick={[Function]}
     onMouseEnter={[Function]}

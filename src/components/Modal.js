@@ -1,5 +1,4 @@
 import React from "react";
-import DateTimePicker from "react-datetime-picker";
 import styled from "styled-components";
 
 const StyledTitle = styled.span`

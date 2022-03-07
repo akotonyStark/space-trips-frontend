@@ -6,6 +6,7 @@ import { keyframes } from "styled-components";
 
 import { ApolloClient, InMemoryCache, gql, HttpLink } from "@apollo/client";
 import { AppContext } from "../App";
+import { FLIGHTS } from "../data/store";
 
 const link = new HttpLink({
   uri: process.env.REACT_APP_API_URL,
@@ -123,8 +124,16 @@ const TripCard = ({ spaceCenter }) => {
         }
       })
       .catch((error) => {
-        setShowFlightsList(false);
-        setResponse(error);
+        setFlights(FLIGHTS.nodes);
+        if (FLIGHTS.nodes.length === 0) {
+          setshowSearching(null);
+          showNotification(true);
+          setResponse(
+            "No flights available at this space station on this date."
+          );
+        } else {
+          setshowSearching(false);
+        }
       });
   };
 

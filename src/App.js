@@ -95,10 +95,6 @@ function App() {
     getSpaceTrips(page);
   }, [page]);
 
-  React.useEffect(() => {
-    console.log(notification);
-  }, [notification]);
-
   return (
     <AppContext.Provider
       value={{

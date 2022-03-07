@@ -93,7 +93,7 @@ const MapBody = () => {
     <div className="map-body">
       <Map
         ref={mapRef}
-        id="space-centers-map"
+        name="space-centers-map"
         initialViewState={viewState}
         onMove={(evt) => setViewState(evt.viewState)}
         mapStyle="mapbox://styles/mapbox/dark-v8"
