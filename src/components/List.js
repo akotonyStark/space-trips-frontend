@@ -25,11 +25,15 @@ const List = () => {
     useContext(AppContext);
 
   const nextPage = (page) => {
-    setPage((prev) => page + 1);
+    if (page < 16 && page >= 1) {
+      setPage((prev) => page + 1);
+    }
   };
 
   const prevPage = (page) => {
-    setPage((prev) => page - 1);
+    if (page <= 16 && page > 1) {
+      setPage((prev) => page - 1);
+    }
   };
 
   return (
@@ -44,19 +48,11 @@ const List = () => {
             />
             <p>Loading...</p>
           </StyledLoader>
-        ) : null}
-
-        {trips.length > 0 &&
+        ) : (
           trips.map((spaceCenter, index) => (
-            <TripCard
-              key={index}
-              spaceCenter={spaceCenter}
-              setHovered={setHovered}
-              marker={marker}
-              setMarker={marker}
-              setMapCenter={setMapCenter}
-            />
-          ))}
+            <TripCard key={index} spaceCenter={spaceCenter} />
+          ))
+        )}
       </div>
       {trips.length > 0 && (
         <div className="container pagination">

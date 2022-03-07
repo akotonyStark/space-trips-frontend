@@ -87,7 +87,8 @@ const SearchInput = (props) => {
       //element.style.boxShadow = "0 4px 8px 0 rgba(0, 0, 0, 0.2)";
     } else {
       alert(
-        selectedItem.name + " is not available on this page, try the next page"
+        //selectedItem.name + " is not available on this page, try the next page"
+        console.log(selectedItem)
       );
       setInputValue("");
     }

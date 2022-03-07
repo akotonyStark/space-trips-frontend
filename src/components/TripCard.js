@@ -49,13 +49,20 @@ const StyledButton = styled.div`
   font-size: 12px;
 `;
 
-const TripCard = ({ spaceCenter, setHovered, marker, setMapCenter }) => {
-  const { departureDate, setFlights } = useContext(AppContext);
+const TripCard = ({ spaceCenter }) => {
+  const {
+    setHovered,
+    marker,
+    setMapCenter,
+    departureDate,
+    setFlights,
+    setShowFlightsList,
+    setshowSearching,
+  } = useContext(AppContext);
 
   const handleGetFlights = (fromID) => {
+    setshowSearching(true);
     let departure = departureDate.toISOString().slice(0, 10);
-    console.log({ From: fromID, On: departure });
-
     client
       .query({
         query: gql`
@@ -97,7 +104,14 @@ const TripCard = ({ spaceCenter, setHovered, marker, setMapCenter }) => {
           }
         `,
       })
-      .then((res) => setFlights(res.data.setFlights.nodes))
+      .then((res) => {
+        setShowFlightsList(true);
+        setFlights(res.data.flights.nodes);
+        console.log("Length:", res.data.flights.nodes.length);
+        if (res.data.flights.nodes.length === 0) {
+          setshowSearching(null);
+        }
+      })
       .catch((error) => console.log(error));
   };
 

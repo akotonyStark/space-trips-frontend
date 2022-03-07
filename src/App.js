@@ -3,6 +3,7 @@ import Map from "./components/Map";
 import SearchBar from "./components/SearchBar";
 import TripsList from "./components/List";
 import TripsHeader from "./components/TripsHeader";
+import FlightsList from "./components/FlightsList";
 import React, { createContext, useState } from "react";
 import { ApolloClient, InMemoryCache, gql, HttpLink } from "@apollo/client";
 
@@ -48,6 +49,8 @@ function App() {
     INIT_STATE.latitude,
   ]);
   const [isModalOpen, setIsModalOpen] = React.useState(false);
+  const [showFlightsList, setShowFlightsList] = React.useState(false);
+  const [showSearching, setshowSearching] = useState(null);
 
   const getSpaceTrips = (page) => {
     client
@@ -91,6 +94,10 @@ function App() {
     getSpaceTrips(page);
   }, [page]);
 
+  React.useEffect(() => {
+    console.log("Show FLights status: ", showFlightsList);
+  }, [showFlightsList]);
+
   return (
     <AppContext.Provider
       value={{
@@ -112,6 +119,10 @@ function App() {
         setMapCenter,
         page,
         setPage,
+        showFlightsList,
+        setShowFlightsList,
+        showSearching,
+        setshowSearching,
       }}
     >
       <div className="App">
@@ -124,7 +135,13 @@ function App() {
           <Map />
         </div>
 
-        <div className="flights-list">Flights List</div>
+        <FlightsList
+          flights={flights}
+          showFlightsList={showFlightsList}
+          setShowFlightsList={setShowFlightsList}
+          showSearching={showSearching}
+        />
+
         {isModalOpen && (
           <Modal setIsModalOpen={setIsModalOpen} spaceCenters={spaceCenters} />
         )}

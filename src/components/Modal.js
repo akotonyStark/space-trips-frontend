@@ -1,5 +1,4 @@
 import React from "react";
-import { SearchBox } from "react-instantsearch-dom";
 import styled from "styled-components";
 
 const StyledTitle = styled.span`
@@ -37,6 +36,7 @@ const SaveButton = styled.span`
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   color: white;
 `;
+
 const Modal = ({ setIsModalOpen, spaceCenters }) => {
   return (
     <div className="mobile-modal">
