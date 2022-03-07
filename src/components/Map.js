@@ -18,19 +18,12 @@ const MapBody = () => {
   const [popupInfo, setPopupInfo] = useState(null);
   const {
     spaceCenters,
-    setSpaceCenters,
     trips,
-    setTrips,
     viewState,
     setViewState,
     hovered,
-    setHovered,
-    marker,
     setMarker,
     mapCenter,
-    setMapCenter,
-    page,
-    setPage,
   } = useContext(AppContext);
 
   const markerRef = useRef(null);

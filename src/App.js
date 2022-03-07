@@ -6,7 +6,7 @@ import TripsHeader from "./components/TripsHeader";
 import React, { createContext, useState } from "react";
 import { ApolloClient, InMemoryCache, gql, HttpLink } from "@apollo/client";
 
-import { TRIPS } from "./data/store.js";
+import { SPACE_CENTERS } from "./data/store.js";
 import Modal from "./components/Modal";
 
 export const AppContext = createContext();
@@ -39,6 +39,7 @@ function App() {
   const [spaceCenters, setSpaceCenters] = React.useState([]);
   const [trips, setTrips] = React.useState([]);
   const [flights, setFlights] = React.useState([]);
+  const [departureDate, setdepartureDate] = React.useState(new Date());
   const [viewState, setViewState] = React.useState(INIT_STATE);
   const [hovered, setHovered] = useState({ id: "", state: false });
   const [marker, setMarker] = React.useState({ id: "", isBouncing: false });
@@ -82,11 +83,9 @@ function App() {
       .catch((err) => {
         console.log("could not load data");
         console.log("...reverting to offline data");
-        setTrips(TRIPS.spaceCenters.nodes);
+        setTrips(SPACE_CENTERS.nodes);
       });
   };
-
-  const getAllFlights = () => {};
 
   React.useEffect(() => {
     getSpaceTrips(page);
@@ -99,6 +98,10 @@ function App() {
         setSpaceCenters,
         trips,
         setTrips,
+        flights,
+        setFlights,
+        departureDate,
+        setdepartureDate,
         viewState,
         setViewState,
         hovered,
@@ -120,6 +123,8 @@ function App() {
           <TripsList />
           <Map />
         </div>
+
+        <div className="flights-list">Flights List</div>
         {isModalOpen && (
           <Modal setIsModalOpen={setIsModalOpen} spaceCenters={spaceCenters} />
         )}

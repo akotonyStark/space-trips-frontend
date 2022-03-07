@@ -1,8 +1,24 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import styled from "styled-components";
 import rocket from "../assets/icons/Rocket.svg";
 import { bounce } from "react-animations";
 import { keyframes } from "styled-components";
+
+import { ApolloClient, InMemoryCache, gql, HttpLink } from "@apollo/client";
+import { AppContext } from "../App";
+
+const link = new HttpLink({
+  uri: process.env.REACT_APP_API_URL,
+  credentials: "same-origin",
+  headers: {
+    authorization: "Bearer API_KEY",
+  },
+});
+
+const client = new ApolloClient({
+  link: link,
+  cache: new InMemoryCache(),
+});
 
 const Bounce = styled.img`
   animation: 1s ${keyframes`${bounce}`} infinite;
@@ -34,6 +50,57 @@ const StyledButton = styled.div`
 `;
 
 const TripCard = ({ spaceCenter, setHovered, marker, setMapCenter }) => {
+  const { departureDate, setFlights } = useContext(AppContext);
+
+  const handleGetFlights = (fromID) => {
+    let departure = departureDate.toISOString().slice(0, 10);
+    console.log({ From: fromID, On: departure });
+
+    client
+      .query({
+        query: gql`
+          # Write your query or mutation here
+          query GetFlightsList {
+            flights(from: ${fromID}, departureDay: "${departure}", pageSize: 100) {
+              nodes {
+                id
+                code
+                launchSite {
+                  id
+                  uid
+                  name
+                  description
+                  latitude
+                  longitude
+                  planet {
+                    id
+                    name
+                  }
+                }
+                landingSite {
+                  id
+                  uid
+                  name
+                  description
+                  latitude
+                  longitude
+                  planet {
+                    id
+                    name
+                  }
+                }
+                departureAt
+                seatCount
+                availableSeats
+              }
+            }
+          }
+        `,
+      })
+      .then((res) => setFlights(res.data.setFlights.nodes))
+      .catch((error) => console.log(error));
+  };
+
   return (
     <div>
       <StyledCard
@@ -75,7 +142,7 @@ const TripCard = ({ spaceCenter, setHovered, marker, setMapCenter }) => {
           <p style={{ marginTop: 30 }}>12 departures planned today</p>
         </div>
 
-        <StyledButton onClick={() => console.log(spaceCenter.uid)}>
+        <StyledButton onClick={() => handleGetFlights(spaceCenter.id)}>
           SEE ALL FLIGHTS
         </StyledButton>
       </StyledCard>

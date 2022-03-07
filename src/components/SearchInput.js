@@ -73,10 +73,18 @@ const SearchInput = (props) => {
         Number(selectedItem._geoloc.lng),
         Number(selectedItem._geoloc.lat),
       ]);
+      element.style.border = "1px solid gold";
       // scroll to element
       element.scrollIntoView({
         behavior: "smooth",
       });
+
+      //undo styling after 3 seconds
+      setTimeout(() => {
+        element.style.border = null;
+      }, 3000);
+
+      //element.style.boxShadow = "0 4px 8px 0 rgba(0, 0, 0, 0.2)";
     } else {
       alert(
         selectedItem.name + " is not available on this page, try the next page"
@@ -104,6 +112,7 @@ const SearchInput = (props) => {
           hits.map((res) => (
             <ResultsItem
               className="algolia-results-item"
+              id={res.uid}
               key={res.objectID}
               onClick={() => handleSelectedSearchResult(res)}
             >

@@ -117,6 +117,14 @@ html {
 .mobile-modal {
   display: none;
 }
+.flights-list {
+  position: absolute;
+  height: 500px;
+  width: 500px;
+  top: 20vh;
+  left: 50%;
+  background-color: #fafafa;
+}
 
 @media screen and (max-width: 1920px) {
   .App {
@@ -127,7 +135,8 @@ html {
 
 @media screen and (max-width: 500px) {
   .map-header,
-  .pagination {
+  .pagination,
+  .flights-list {
     display: none;
   }
 
