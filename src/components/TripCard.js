@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useState } from "react";
 import styled from "styled-components";
 import rocket from "../assets/icons/Rocket.svg";
 import { bounce } from "react-animations";
@@ -35,6 +35,7 @@ const StyledCard = styled.div`
   flex-direction: column;
   justify-content: flex-end;
   font-family: "Lato";
+  transition: transform 0.5s;
 `;
 
 const StyledButton = styled.div`
@@ -58,10 +59,13 @@ const TripCard = ({ spaceCenter }) => {
     setFlights,
     setShowFlightsList,
     setshowSearching,
+    showNotification,
+    setResponse,
   } = useContext(AppContext);
 
   const handleGetFlights = (fromID) => {
     setshowSearching(true);
+    setShowFlightsList(true);
     let departure = departureDate.toISOString().slice(0, 10);
     client
       .query({
@@ -105,14 +109,22 @@ const TripCard = ({ spaceCenter }) => {
         `,
       })
       .then((res) => {
-        setShowFlightsList(true);
         setFlights(res.data.flights.nodes);
-        console.log("Length:", res.data.flights.nodes.length);
+
         if (res.data.flights.nodes.length === 0) {
           setshowSearching(null);
+          showNotification(true);
+          setResponse(
+            "No flights available at this space station on this date"
+          );
+        } else {
+          setshowSearching(false);
         }
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        setShowFlightsList(false);
+        setResponse(error);
+      });
   };
 
   return (

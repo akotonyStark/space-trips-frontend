@@ -9,19 +9,21 @@ const ResultsItem = styled.div`
   padding-left: 20px;
 `;
 
-export default function FlightsList({
+const FlightsList = ({
   flights,
   showFlightsList,
   setShowFlightsList,
   showSearching,
-}) {
-  useEffect(() => {
-    console.log("Searching:", showSearching);
-  }, [showSearching]);
+  setResponse,
+  showNotification,
+}) => {
   const handleFlightSelection = (selectedFlight) => {
     setShowFlightsList(false);
-    alert(
-      "Your booking for Flight Number " + selectedFlight.id + " was successful"
+    showNotification(true);
+    setResponse(
+      "Congrats 🚀🚀🚀 your booking for Flight Number " +
+        selectedFlight.id +
+        " was successful!"
     );
   };
 
@@ -53,7 +55,7 @@ export default function FlightsList({
       )}
     </>
   );
-}
+};
 
 const styles = {
   header: {
@@ -68,3 +70,5 @@ const styles = {
     overflow: "auto",
   },
 };
+
+export default FlightsList;

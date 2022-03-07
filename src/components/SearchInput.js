@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect, useContext } from "react";
 import styled from "styled-components";
 import { useSearchBox } from "react-instantsearch-hooks";
-
 import { AppContext } from "../App";
 import { useHits } from "react-instantsearch-hooks";
 
@@ -41,7 +40,8 @@ const SearchInput = (props) => {
 
   const { hits } = useHits();
 
-  const { setMapCenter } = useContext(AppContext);
+  const { setMapCenter, showNotification, setResponse } =
+    useContext(AppContext);
 
   useEffect(() => {
     if (query !== inputValue) {
@@ -86,9 +86,9 @@ const SearchInput = (props) => {
 
       //element.style.boxShadow = "0 4px 8px 0 rgba(0, 0, 0, 0.2)";
     } else {
-      alert(
-        //selectedItem.name + " is not available on this page, try the next page"
-        console.log(selectedItem)
+      showNotification(true);
+      setResponse(
+        selectedItem.name + " is not available on this page, try the next page"
       );
       setInputValue("");
     }

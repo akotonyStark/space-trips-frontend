@@ -73,7 +73,7 @@ const SearchBar = () => {
       </StyledMenu>
       <StyledButton
         className="search-flights"
-        onClick={() => console.log("searching...")}
+        onClick={() => console.log("toggle mobile view")}
       >
         <img src={arrow} alt="arrow" />
       </StyledButton>

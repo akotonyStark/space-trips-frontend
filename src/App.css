@@ -74,7 +74,8 @@ html {
 }
 
 .trip-card:hover {
-  box-shadow: 0 4px 8px 0 gold;
+  box-shadow: 0 4px 8px 0 #cecece;
+  transform: scale(1.1);
   cursor: pointer;
 }
 
@@ -89,6 +90,7 @@ html {
 
 .algolia-results-item:hover {
   background-color: gold;
+  color: white;
 }
 
 .mapboxgl-popup-close-button {

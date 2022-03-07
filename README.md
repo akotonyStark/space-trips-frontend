@@ -49,6 +49,8 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 - The searchbar component shows two fields that acts as filters on the map and the list
 
+- User can search for available flights in a space station
+
 - The searchbar communicates with the `<List />` component to scroll to the selected element.
 
 - The searchbar communicates with the `<Map />` component to center it on the selected Space center position.

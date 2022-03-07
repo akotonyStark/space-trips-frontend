@@ -4,6 +4,7 @@ import SearchBar from "./components/SearchBar";
 import TripsList from "./components/List";
 import TripsHeader from "./components/TripsHeader";
 import FlightsList from "./components/FlightsList";
+import Notification from "./components/Notification";
 import React, { createContext, useState } from "react";
 import { ApolloClient, InMemoryCache, gql, HttpLink } from "@apollo/client";
 
@@ -36,21 +37,23 @@ const INIT_STATE = {
 };
 
 function App() {
-  const [page, setPage] = React.useState(1);
-  const [spaceCenters, setSpaceCenters] = React.useState([]);
-  const [trips, setTrips] = React.useState([]);
-  const [flights, setFlights] = React.useState([]);
-  const [departureDate, setdepartureDate] = React.useState(new Date());
-  const [viewState, setViewState] = React.useState(INIT_STATE);
+  const [page, setPage] = useState(1);
+  const [spaceCenters, setSpaceCenters] = useState([]);
+  const [trips, setTrips] = useState([]);
+  const [flights, setFlights] = useState([]);
+  const [departureDate, setdepartureDate] = useState(new Date());
+  const [viewState, setViewState] = useState(INIT_STATE);
   const [hovered, setHovered] = useState({ id: "", state: false });
-  const [marker, setMarker] = React.useState({ id: "", isBouncing: false });
-  const [mapCenter, setMapCenter] = React.useState([
+  const [marker, setMarker] = useState({ id: "", isBouncing: false });
+  const [mapCenter, setMapCenter] = useState([
     INIT_STATE.longitude,
     INIT_STATE.latitude,
   ]);
   const [isModalOpen, setIsModalOpen] = React.useState(false);
   const [showFlightsList, setShowFlightsList] = React.useState(false);
   const [showSearching, setshowSearching] = useState(null);
+  const [notification, showNotification] = useState(false);
+  const [apiResponse, setResponse] = useState("");
 
   const getSpaceTrips = (page) => {
     client
@@ -84,8 +87,7 @@ function App() {
         setTrips(result.data.spaceCenters.nodes);
       })
       .catch((err) => {
-        console.log("could not load data");
-        console.log("...reverting to offline data");
+        setResponse("could not load space centers...loading offline data");
         setTrips(SPACE_CENTERS.nodes);
       });
   };
@@ -95,8 +97,8 @@ function App() {
   }, [page]);
 
   React.useEffect(() => {
-    console.log("Show FLights status: ", showFlightsList);
-  }, [showFlightsList]);
+    console.log(notification);
+  }, [notification]);
 
   return (
     <AppContext.Provider
@@ -123,28 +125,47 @@ function App() {
         setShowFlightsList,
         showSearching,
         setshowSearching,
+        notification,
+        showNotification,
+        apiResponse,
+        setResponse,
       }}
     >
       <div className="App">
-        <div className="container">
-          <TripsHeader setIsModalOpen={setIsModalOpen} />
-          <SearchBar />
-        </div>
-        <div className="container">
-          <TripsList />
-          <Map />
+        <div className="='desktop">
+          <div className="container">
+            <TripsHeader setIsModalOpen={setIsModalOpen} />
+            <SearchBar />
+          </div>
+          <div className="container">
+            <TripsList />
+            <Map />
+          </div>
+          <FlightsList
+            flights={flights}
+            showFlightsList={showFlightsList}
+            setShowFlightsList={setShowFlightsList}
+            showSearching={showSearching}
+            setResponse={setResponse}
+            showNotification={showNotification}
+          />
         </div>
 
-        <FlightsList
-          flights={flights}
-          showFlightsList={showFlightsList}
-          setShowFlightsList={setShowFlightsList}
-          showSearching={showSearching}
-        />
-
-        {isModalOpen && (
-          <Modal setIsModalOpen={setIsModalOpen} spaceCenters={spaceCenters} />
+        {notification && (
+          <Notification
+            message={apiResponse}
+            showNotification={showNotification}
+          />
         )}
+
+        <div className="mobile">
+          {isModalOpen && (
+            <Modal
+              setIsModalOpen={setIsModalOpen}
+              spaceCenters={spaceCenters}
+            />
+          )}
+        </div>
       </div>
     </AppContext.Provider>
   );
