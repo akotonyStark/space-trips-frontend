@@ -23,7 +23,7 @@ const StyledContainer = styled.div`
 `;
 const Notification = ({ message, showNotification }) => {
   return (
-    <StyledContainer>
+    <StyledContainer className="notification">
       {message}
       <button onClick={() => showNotification(false)}>OK</button>
     </StyledContainer>

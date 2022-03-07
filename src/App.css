@@ -14,7 +14,6 @@ html {
   width: 80%;
   margin: 0 auto;
   border: 1px solid #e3e3e3;
-  position: relative;
 }
 
 .container {
@@ -47,6 +46,7 @@ html {
   max-height: 85vh;
   overflow: auto;
 }
+
 .map-header {
   display: flex;
   align-items: center;
@@ -148,9 +148,22 @@ html {
 
 @media screen and (max-width: 500px) {
   .map-header,
-  .pagination,
-  .flights-list {
+  .pagination {
     display: none;
+  }
+
+  .flights-list {
+    width: 80% !important;
+    top: 30%;
+    left: 30%;
+    transform: translate(-20%, -20%);
+    z-index: 3000;
+    font-size: 12px;
+    box-shadow: 0 4px 8px 0 #cecece;
+  }
+
+  .notification {
+    font-size: 12px;
   }
 
   .space-header {
@@ -223,5 +236,9 @@ html {
     top: 0vh;
     font-family: "Lato";
     font-size: 14px !important;
+  }
+
+  .notification {
+    width: 80% !important;
   }
 }

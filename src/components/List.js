@@ -21,8 +21,7 @@ const StyledLoader = styled.div`
 `;
 
 const List = () => {
-  const { trips, setHovered, marker, setMapCenter, page, setPage } =
-    useContext(AppContext);
+  const { trips, page, setPage } = useContext(AppContext);
 
   const nextPage = (page) => {
     if (page < 16 && page >= 1) {

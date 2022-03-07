@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import rocket from "../assets/icons/Rocket.svg";
 import { bounce } from "react-animations";
@@ -66,7 +66,8 @@ const TripCard = ({ spaceCenter }) => {
   const handleGetFlights = (fromID) => {
     setshowSearching(true);
     setShowFlightsList(true);
-    let departure = departureDate.toISOString().slice(0, 10);
+
+    let departure = new Date(departureDate).toISOString().slice(0, 10);
     client
       .query({
         query: gql`
@@ -115,7 +116,7 @@ const TripCard = ({ spaceCenter }) => {
           setshowSearching(null);
           showNotification(true);
           setResponse(
-            "No flights available at this space station on this date"
+            "No flights available at this space station on this date."
           );
         } else {
           setshowSearching(false);

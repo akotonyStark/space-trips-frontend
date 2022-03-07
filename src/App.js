@@ -38,7 +38,6 @@ const INIT_STATE = {
 
 function App() {
   const [page, setPage] = useState(1);
-  const [spaceCenters, setSpaceCenters] = useState([]);
   const [trips, setTrips] = useState([]);
   const [flights, setFlights] = useState([]);
   const [departureDate, setdepartureDate] = useState(new Date());
@@ -103,8 +102,6 @@ function App() {
   return (
     <AppContext.Provider
       value={{
-        spaceCenters,
-        setSpaceCenters,
         trips,
         setTrips,
         flights,
@@ -143,6 +140,7 @@ function App() {
           </div>
           <FlightsList
             flights={flights}
+            setFlights={setFlights}
             showFlightsList={showFlightsList}
             setShowFlightsList={setShowFlightsList}
             showSearching={showSearching}
@@ -162,7 +160,9 @@ function App() {
           {isModalOpen && (
             <Modal
               setIsModalOpen={setIsModalOpen}
-              spaceCenters={spaceCenters}
+              trips={trips}
+              departureDate={departureDate}
+              setdepartureDate={setdepartureDate}
             />
           )}
         </div>

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 
 const ResultsItem = styled.div`
@@ -11,6 +11,7 @@ const ResultsItem = styled.div`
 
 const FlightsList = ({
   flights,
+  setFlights,
   showFlightsList,
   setShowFlightsList,
   showSearching,
@@ -18,11 +19,14 @@ const FlightsList = ({
   showNotification,
 }) => {
   const handleFlightSelection = (selectedFlight) => {
+    setFlights((prev) => []);
     setShowFlightsList(false);
     showNotification(true);
     setResponse(
       "Congrats 🚀🚀🚀 your booking for Flight Number " +
         selectedFlight.id +
+        " to " +
+        selectedFlight.landingSite.name +
         " was successful!"
     );
   };

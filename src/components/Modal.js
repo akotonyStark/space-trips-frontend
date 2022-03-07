@@ -1,4 +1,5 @@
 import React from "react";
+import DateTimePicker from "react-datetime-picker";
 import styled from "styled-components";
 
 const StyledTitle = styled.span`
@@ -37,7 +38,7 @@ const SaveButton = styled.span`
   color: white;
 `;
 
-const Modal = ({ setIsModalOpen, spaceCenters }) => {
+const Modal = ({ setIsModalOpen, trips, departureDate, setdepartureDate }) => {
   return (
     <div className="mobile-modal">
       <div style={styles.headerGroup}>
@@ -49,14 +50,19 @@ const Modal = ({ setIsModalOpen, spaceCenters }) => {
       <div style={styles.formGroup}>
         <span>Departure</span>
         <select style={{ height: 100, width: "100%" }}>
-          {spaceCenters.map((item) => (
-            <option key={item.objectID}>{item.name}</option>
+          {trips.map((item) => (
+            <option key={item.id}>{item.name}</option>
           ))}
         </select>
       </div>
       <div style={styles.formGroup}>
         <span>Departure Time</span>
-        <input type="datetime-local" style={{ height: 100, width: "100%" }} />
+        <input
+          type="datetime-local"
+          value={departureDate}
+          style={{ width: "100%", height: 100 }}
+          onChange={(e) => setdepartureDate(e.target.value)}
+        />
       </div>
       <SaveButton onClick={() => setIsModalOpen(false)}>SAVE</SaveButton>
     </div>

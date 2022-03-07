@@ -16,15 +16,8 @@ import { AppContext } from "../App";
 
 const MapBody = () => {
   const [popupInfo, setPopupInfo] = useState(null);
-  const {
-    spaceCenters,
-    trips,
-    viewState,
-    setViewState,
-    hovered,
-    setMarker,
-    mapCenter,
-  } = useContext(AppContext);
+  const { trips, viewState, setViewState, hovered, setMarker, mapCenter } =
+    useContext(AppContext);
 
   const markerRef = useRef(null);
   const mapRef = useRef(null);
@@ -76,24 +69,24 @@ const MapBody = () => {
           latitude={center.latitude}
           anchor="bottom"
         >
-          {hovered.state && hovered.id == center.name.split(" ").join("-") ? (
+          {hovered.state && hovered.id === center.name.split(" ").join("-") ? (
             <img
               ref={markerRef}
               src={RedPin}
-              alt="red-image"
+              alt="red-marker"
               onClick={() => handleMarkerInteraction(center)}
             />
           ) : (
             <img
               ref={markerRef}
               src={YellowPin}
-              alt="yellow-image"
+              alt="yellow-marker"
               onClick={() => handleMarkerInteraction(center)}
             />
           )}
         </Marker>
       )),
-    [spaceCenters, hovered]
+    [trips, hovered]
   );
 
   return (
