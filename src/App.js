@@ -6,24 +6,13 @@ import TripsHeader from "./components/TripsHeader";
 import FlightsList from "./components/FlightsList";
 import Notification from "./components/Notification";
 import React, { createContext, useState } from "react";
-import { ApolloClient, InMemoryCache, gql, HttpLink } from "@apollo/client";
+import { gql } from "@apollo/client";
+import { client } from "./utils/helperFunctions";
 
 import { SPACE_CENTERS } from "./data/store.js";
 import Modal from "./components/Modal";
 
 export const AppContext = createContext();
-
-const link = new HttpLink({
-  uri: process.env.REACT_APP_API_URL,
-  credentials: "same-origin",
-  headers: {
-    authorization: "Bearer API_KEY",
-  },
-});
-const client = new ApolloClient({
-  link: link,
-  cache: new InMemoryCache(),
-});
 
 const INIT_STATE = {
   width: "100%",

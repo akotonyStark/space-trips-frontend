@@ -7,6 +7,7 @@ A guide to the source code for theSpacetrip booking application
 ## Table of Content
 
 - [Specifications](#Prerequisites)
+- [ENV VARIABLES](#Enviroment)
 - [Installation](#Installation)
 - [HowItWorks](#HowItWorks)
 - [Mobile](#Mobile)
@@ -17,6 +18,10 @@ In order to get the project up and running, make sure you have the following ins
 
 - Node
 - Docker
+
+## Enviroment
+
+Mapbox Access Token and API URL can be found in the .env file of the project
 
 ## Installation
 
@@ -30,7 +35,9 @@ This will run your server on `http://localhost:3000/graphql`.
 
 - In the project directory, you can run:
 
-`npm start`
+`npm start` - to run the application
+`npm test` - to run tests suites
+`npm build` - to build app for deployment
 
 Runs the app in the development mode.\
 Open [http://localhost:3001]to view it in your browser. Port number 3000 will be taken if the server is run first

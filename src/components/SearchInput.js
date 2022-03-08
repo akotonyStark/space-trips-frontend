@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { useSearchBox } from "react-instantsearch-hooks";
 import { AppContext } from "../App";
 import { useHits } from "react-instantsearch-hooks";
+import { convertToID } from "../utils/helperFunctions";
 
 const StyledInput = styled.input`
   color: #f1f1f1;
@@ -65,7 +66,7 @@ const SearchInput = (props) => {
     setInputValue(selectedItem.name);
 
     //scroll to searched element
-    let elementId = selectedItem.name.split(" ").join("-");
+    let elementId = convertToID(selectedItem.name);
     let element = document.getElementById(`${elementId}`);
 
     if (element) {

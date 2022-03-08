@@ -4,22 +4,10 @@ import rocket from "../assets/icons/Rocket.svg";
 import { bounce } from "react-animations";
 import { keyframes } from "styled-components";
 
-import { ApolloClient, InMemoryCache, gql, HttpLink } from "@apollo/client";
+import { gql } from "@apollo/client";
 import { AppContext } from "../App";
 import { FLIGHTS } from "../data/store";
-
-const link = new HttpLink({
-  uri: process.env.REACT_APP_API_URL,
-  credentials: "same-origin",
-  headers: {
-    authorization: "Bearer API_KEY",
-  },
-});
-
-const client = new ApolloClient({
-  link: link,
-  cache: new InMemoryCache(),
-});
+import { convertToID, client } from "../utils/helperFunctions";
 
 const Bounce = styled.img`
   animation: 1s ${keyframes`${bounce}`} infinite;
@@ -141,16 +129,16 @@ const TripCard = ({ spaceCenter }) => {
     <div>
       <StyledCard
         className="trip-card"
-        id={spaceCenter.name.split(" ").join("-")}
+        id={convertToID(spaceCenter.name)}
         onMouseEnter={() =>
           setHovered({
-            id: spaceCenter.name.split(" ").join("-"),
+            id: convertToID(spaceCenter.name),
             state: true,
           })
         }
         onMouseLeave={() =>
           setHovered({
-            id: spaceCenter.name.split(" ").join("-"),
+            id: convertToID(spaceCenter.name),
             state: false,
           })
         }
@@ -168,7 +156,7 @@ const TripCard = ({ spaceCenter }) => {
           >
             <span className="trip-title">{spaceCenter.name}</span>
             {marker.isBouncing &&
-            marker.id === spaceCenter.name.split(" ").join("-") ? (
+            marker.id === convertToID(spaceCenter.name) ? (
               <Bounce src={rocket} alt={rocket} className="rocket" />
             ) : (
               <img src={rocket} alt={rocket} className="rocket" />
@@ -178,7 +166,10 @@ const TripCard = ({ spaceCenter }) => {
           <p style={{ marginTop: 30 }}>12 departures planned today</p>
         </div>
 
-        <StyledButton onClick={() => handleGetFlights(spaceCenter.id)}>
+        <StyledButton
+          title="click to view all flights"
+          onClick={() => handleGetFlights(spaceCenter.id)}
+        >
           SEE ALL FLIGHTS
         </StyledButton>
       </StyledCard>

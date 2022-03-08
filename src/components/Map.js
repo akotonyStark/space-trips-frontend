@@ -13,6 +13,7 @@ import RedPin from "../assets/red.png";
 import space_image from "../assets/space_image.png";
 
 import { AppContext } from "../App";
+import { convertToID } from "../utils/helperFunctions";
 
 const MapBody = () => {
   const [popupInfo, setPopupInfo] = useState(null);
@@ -40,9 +41,12 @@ const MapBody = () => {
 
   const handleMarkerInteraction = (sp_center) => {
     setPopupInfo({ ...sp_center, image: space_image });
-    setMarker({ id: sp_center.name.split(" ").join("-"), isBouncing: true });
+    setMarker({
+      id: convertToID(sp_center.name),
+      isBouncing: true,
+    });
 
-    let elementId = sp_center.name.split(" ").join("-");
+    let elementId = convertToID(sp_center.name);
     let element = document.getElementById(`${elementId}`);
 
     // scroll to element
@@ -55,7 +59,7 @@ const MapBody = () => {
 
     //stop bouncing after 3 seconds
     setTimeout(() => {
-      setMarker({ id: sp_center.name.split(" ").join("-"), isBouncing: false });
+      setMarker({ id: convertToID(sp_center.name), isBouncing: false });
       element.style.boxShadow = null;
     }, 3000);
   };
@@ -69,7 +73,7 @@ const MapBody = () => {
           latitude={center.latitude}
           anchor="bottom"
         >
-          {hovered.state && hovered.id === center.name.split(" ").join("-") ? (
+          {hovered.state && hovered.id === convertToID(center.name) ? (
             <img
               ref={markerRef}
               src={RedPin}

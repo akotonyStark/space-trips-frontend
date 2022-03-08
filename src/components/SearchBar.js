@@ -24,10 +24,11 @@ const StyledMenu = styled.div`
 `;
 
 const StyledMenuItem = styled.div`
-  width: 50%;
+  width: 100%;
   height: 50px;
   display: flex;
   align-items: center;
+  justify-content: flex-start;
   gap: 10%;
 `;
 
@@ -63,6 +64,7 @@ const SearchBar = () => {
           <div className="datetime-picker">
             {/* <div>9/20/2019 - 12.45am</div> */}
             <DateTimePicker
+              style={{ border: "none" }}
               calendarIcon={null}
               clearIcon={null}
               onChange={(value) => setdepartureDate(value)}

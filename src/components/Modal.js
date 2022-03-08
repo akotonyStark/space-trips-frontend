@@ -59,7 +59,7 @@ const Modal = ({ setIsModalOpen, trips, departureDate, setdepartureDate }) => {
         <input
           type="datetime-local"
           value={departureDate}
-          style={{ width: "100%", height: 100 }}
+          style={{ width: 100, height: 100 }}
           onChange={(e) => setdepartureDate(e.target.value)}
         />
       </div>

@@ -139,6 +139,13 @@ html {
   cursor: pointer;
 }
 
+.react-datetime-picker__wrapper {
+  border: none !important;
+}
+.datetime-picker {
+  border-bottom: 1px solid white;
+}
+
 @media screen and (max-width: 1920px) {
   .App {
     width: 100%;

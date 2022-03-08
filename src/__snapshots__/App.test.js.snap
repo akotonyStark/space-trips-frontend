@@ -54,6 +54,7 @@ exports[`if hover effect works correctly 1`] = `
     <div
       className="sc-furwcr eqwTlf"
       onClick={[Function]}
+      title="click to view all flights"
     >
       SEE ALL FLIGHTS
     </div>
@@ -115,6 +116,7 @@ exports[`if hover effect works correctly 2`] = `
     <div
       className="sc-furwcr eqwTlf"
       onClick={[Function]}
+      title="click to view all flights"
     >
       SEE ALL FLIGHTS
     </div>
@@ -176,6 +178,7 @@ exports[`if hover effect works correctly 3`] = `
     <div
       className="sc-furwcr eqwTlf"
       onClick={[Function]}
+      title="click to view all flights"
     >
       SEE ALL FLIGHTS
     </div>
