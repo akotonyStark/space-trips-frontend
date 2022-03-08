@@ -33,6 +33,14 @@ $ docker-compose up -d
 
 This will run your server on `http://localhost:3000/graphql`.
 
+When setting up your Graphql configuration (on the frontend), make sure to pass the following header in order to be able to have access to the queries:
+
+```json
+{
+  "Authorization": "Bearer API_KEY"
+}
+```
+
 - In the project directory, you can run:
 
 `npm start` - to run the application
